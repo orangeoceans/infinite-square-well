@@ -11,12 +11,21 @@ config_version=5
 [application]
 
 config/name="Ldjam 54"
+run/main_scene="res://assets/scenes/grid_controller.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+FFT="*res://addons/godot-fft/Fft.gd"
 
 [dotnet]
 
 project/assembly_name="Ldjam 54"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-fft/plugin.cfg")
 
 [rendering]
 

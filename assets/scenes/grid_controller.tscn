@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7ebwhtj6vv4b"]
+
+[ext_resource type="Shader" path="res://assets/shaders/pixel_shader.gdshader" id="1_gna3i"]
+[ext_resource type="Texture2D" uid="uid://bnbe6k71nf8bi" path="res://assets/sprites/grid.png" id="3_jsfo5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3qyy5"]
+shader = ExtResource("1_gna3i")
+
+[node name="GridController" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3qyy5")
+texture = ExtResource("3_jsfo5")
