@@ -1,13 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7ebwhtj6vv4b"]
+[gd_scene load_steps=10 format=3 uid="uid://b7ebwhtj6vv4b"]
 
 [ext_resource type="Shader" path="res://assets/shaders/pixel_shader.gdshader" id="1_gna3i"]
+[ext_resource type="Texture2D" uid="uid://clnaaw6mdndg6" path="res://assets/sprites/gradient.png" id="2_3sckf"]
+[ext_resource type="Texture2D" uid="uid://ceb0bgmcfitla" path="res://assets/sprites/jeff.png" id="2_erd2o"]
+[ext_resource type="Texture2D" uid="uid://c8kite4ohj6ij" path="res://assets/sprites/w_clouds.png" id="3_0ovnu"]
 [ext_resource type="Texture2D" uid="uid://bnbe6k71nf8bi" path="res://assets/sprites/grid.png" id="3_jsfo5"]
+[ext_resource type="Texture2D" uid="uid://do5naernrfrbc" path="res://assets/sprites/x_clouds.png" id="4_ct6wk"]
+[ext_resource type="Texture2D" uid="uid://qgd5c3gyljk8" path="res://assets/sprites/y_clouds.png" id="5_0x1rx"]
+[ext_resource type="Texture2D" uid="uid://bljqvuau0fkov" path="res://assets/sprites/z_clouds.png" id="6_f78ar"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3qyy5"]
 shader = ExtResource("1_gna3i")
+shader_parameter/jeff_pos = Vector4(0, 0, 0, 0)
+shader_parameter/w_clouds = ExtResource("3_0ovnu")
+shader_parameter/x_clouds = ExtResource("4_ct6wk")
+shader_parameter/y_clouds = ExtResource("5_0x1rx")
+shader_parameter/z_clouds = ExtResource("6_f78ar")
+shader_parameter/cloud_gradient = ExtResource("2_3sckf")
+shader_parameter/jeff_texture = ExtResource("2_erd2o")
 
 [node name="GridController" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 3
 material = SubResource("ShaderMaterial_3qyy5")
+position = Vector2(526, 283)
+scale = Vector2(4, 4)
 texture = ExtResource("3_jsfo5")
