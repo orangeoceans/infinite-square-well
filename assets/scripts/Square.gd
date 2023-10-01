@@ -5,7 +5,7 @@ var speed: float = 0.05
 var max_pos: float = 100.
 var pos: Vector4
 
-@onready var pos_label: Label = $Position
+@export var pos_label: Label3D
 
 func _ready():
 	# Make sure the node has a material and that it's a ShaderMaterial
