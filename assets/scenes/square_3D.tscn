@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://c5g3nioduepjr"]
+[gd_scene load_steps=18 format=3 uid="uid://c0kjtb30py00w"]
 
+[ext_resource type="Script" path="res://assets/scripts/DialogueSystem.gd" id="1_ay7mc"]
 [ext_resource type="Shader" path="res://assets/shaders/pixel_shader.gdshader" id="1_btqfs"]
 [ext_resource type="Texture2D" uid="uid://dv4cdgjfwjjog" path="res://assets/sprites/goldblum.png" id="1_hf5ej"]
 [ext_resource type="Texture2D" uid="uid://clnaaw6mdndg6" path="res://assets/sprites/gradient.png" id="2_p60up"]
@@ -10,6 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://bljqvuau0fkov" path="res://assets/sprites/z_clouds.png" id="7_q6kx6"]
 [ext_resource type="Texture2D" uid="uid://bnbe6k71nf8bi" path="res://assets/sprites/grid.png" id="8_vx24x"]
 [ext_resource type="Script" path="res://assets/scripts/Square.gd" id="9_vquxr"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_sboss"]
+action = &"advance_dialogue"
+
+[sub_resource type="Shortcut" id="Shortcut_qbce5"]
+events = [SubResource("InputEventAction_sboss")]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_njtko"]
 viewport_path = NodePath("SquareMesh/SquareViewport")
@@ -37,6 +44,41 @@ shader_parameter/key_textures = Array[Texture2D]([ExtResource("3_efu71")])
 
 [node name="square_3D" type="Node3D"]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1_ay7mc")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -430.0
+offset_top = 202.0
+offset_right = 430.0
+offset_bottom = 430.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "test"
+
+[node name="InteractButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = 102.0
+offset_right = 62.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+shortcut = SubResource("Shortcut_qbce5")
+text = "[SPACE]"
+
 [node name="SquareMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_b3738")
 
@@ -55,12 +97,13 @@ transform = Transform3D(1, 0, 0, 0, 0.344741, 0.938698, 0, -0.938698, 0.344741, 
 text = "(0, 0, 0, 0)"
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.388191, 0.921579, 0, -0.921579, 0.388191, 0, 1.27296, 1.00225)
+transform = Transform3D(1, 0, 0, 0, 0.388191, 0.921579, 0, -0.921579, 0.388191, 0, 1.66563, 1.191)
 
 [node name="FigureSprites" type="Node3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.173205, 0.1, 0, -0.1, 0.173205, 0, 0.274379, 0.504164)
 top_level = true
 
 [node name="JeffSprite" type="Sprite3D" parent="FigureSprites"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 texture = ExtResource("1_hf5ej")
+
+[connection signal="pressed" from="CanvasLayer/InteractButton" to="CanvasLayer" method="_on_button_pressed"]

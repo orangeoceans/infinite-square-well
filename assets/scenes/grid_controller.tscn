@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b7ebwhtj6vv4b"]
+[gd_scene load_steps=14 format=3 uid="uid://b3k7yignharr2"]
 
 [ext_resource type="Shader" path="res://assets/shaders/pixel_shader.gdshader" id="1_gna3i"]
 [ext_resource type="Texture2D" uid="uid://clnaaw6mdndg6" path="res://assets/sprites/gradient.png" id="2_3sckf"]
