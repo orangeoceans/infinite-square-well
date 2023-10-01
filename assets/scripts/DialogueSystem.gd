@@ -14,7 +14,8 @@ var button_tween
 
 func update_dialogue():
 	if dialogue_index < encounter_text[nearest_encounter].size():
-		$DialogueRichtext.text = encounter_text[nearest_encounter][dialogue_index]
+		$DialogueRichtext.raw_text = encounter_text[nearest_encounter][dialogue_index]
+		$DialogueRichtext.update_text()
 		if text_tween:
 			text_tween.kill()
 		$DialogueRichtext.visible_ratio = 0.
