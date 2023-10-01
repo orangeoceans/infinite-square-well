@@ -1,11 +1,12 @@
-extends Sprite2D
+extends Node3D
 
 # Speed to modify the vec4 components
 var speed: float = 0.05
 var max_pos: float = 100.
 var pos: Vector4
 
-@export var pos_label: Label3D
+var square_sprite: Sprite2D;
+var pos_label: Label3D
 
 var keypoint_pos = {
 	"jeff": Vector4(1., 1., 1., 1.)
@@ -23,12 +24,14 @@ var keypoint_fig_path = {"jeff": "/root/square_3D/FigureSprites/JeffSprite"}
 var keypoint_fig = {}
 
 func _ready():
+	square_sprite = $SquareMesh/SquareViewport/SquareSprite
+	pos_label = $PositionLabel
 	# Make sure the node has a material and that it's a ShaderMaterial
-	assert(self.material is ShaderMaterial)
+	assert(square_sprite.material is ShaderMaterial)
 	pos = Vector4(1., 1., 1., 1.)
 	pos_label.text = str(pos)
-	self.material.set_shader_parameter("pos", pos)
-	self.material.set_shader_parameter("max_pos", max_pos)
+	square_sprite.material.set_shader_parameter("pos", pos)
+	square_sprite.material.set_shader_parameter("max_pos", max_pos)
 	for key in keypoint_fig_path:
 		keypoint_fig[key] = get_node(keypoint_fig_path[key])
 
@@ -74,6 +77,8 @@ func modify_pos(index: int, amount: float):
 		var keypoint_dist = keypoint_pos[key].distance_to(pos)
 		keypoint_fig[key].modulate.a = clamp(1. - keypoint_dist**2, 0., 1.)
 		keypoint_fig[key].position.y = 0. - keypoint_dist**2
-	self.material.set_shader_parameter("point_line_dists", point_line_dists)
-	self.material.set_shader_parameter("pos", pos)
+	square_sprite.material.set_shader_parameter("point_line_dists", point_line_dists)
+	square_sprite.material.set_shader_parameter("pos", pos)
 	pos_label.text = str(pos)
+
+
