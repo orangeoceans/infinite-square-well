@@ -39,6 +39,7 @@ func _ready():
 	square_sprite.material.set_shader_parameter("max_pos", max_pos)
 	for key in keypoint_fig_path:
 		keypoint_fig[key] = get_node(keypoint_fig_path[key])
+	update_square()
 
 func _process(_delta):
 	can_move = not $DialogueSystem.dialogue_open
@@ -102,5 +103,6 @@ func update_square():
 	pos_label.text = "%.2f %.2f %.2f %.2f" % [pos[0], pos[1], pos[2], pos[3]]
 
 func _on_interact_button_pressed():
-	pos_tween = get_tree().create_tween()
-	pos_tween.tween_property(self, "pos", keypoint_pos[$DialogueSystem.nearest_encounter], 0.3)
+	if $DialogueSystem.can_talk:
+		pos_tween = get_tree().create_tween()
+		pos_tween.tween_property(self, "pos", keypoint_pos[$DialogueSystem.nearest_encounter], 0.3)

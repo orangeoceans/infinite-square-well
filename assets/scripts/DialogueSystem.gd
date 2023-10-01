@@ -3,7 +3,7 @@ extends CanvasLayer
 @export var nearest_encounter: String
 @export var nearest_encounter_dist: float
 
-var dialogue_enabled = false
+var can_talk = false
 var encounter_text = {"jeff": ["Hello my name is Jeff Goldblum.", "I am a famous actor who played Dr. Ian Malcolm in Jurassic Park.", "I must say you look quite ravishing today."]}
 var dialogue_index = 0
 var dialogue_open = false
@@ -33,7 +33,7 @@ func update_dialogue():
 
 var button_press_finished = true
 func _on_button_pressed():
-	if dialogue_open or not button_press_finished or not dialogue_enabled:
+	if dialogue_open or not button_press_finished or not can_talk:
 		return
 	dialogue_open = true
 	button_press_finished = false
@@ -61,9 +61,9 @@ func _ready():
 
 func _process(_delta):
 	var dialogue_to_enable = (nearest_encounter_dist <= speak_dist)
-	if dialogue_enabled != dialogue_to_enable:
+	if can_talk != dialogue_to_enable:
 		if button_tween:
 			button_tween.kill()
 		button_tween = get_tree().create_tween()
 		button_tween.tween_property($InteractButton, "modulate", Color(1, 1, 1, int(dialogue_to_enable)), 0.3)
-	dialogue_enabled = dialogue_to_enable
+	can_talk = dialogue_to_enable
