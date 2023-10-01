@@ -106,3 +106,11 @@ func _on_interact_button_pressed():
 	if $DialogueSystem.can_talk:
 		pos_tween = get_tree().create_tween()
 		pos_tween.tween_property(self, "pos", keypoint_pos[$DialogueSystem.nearest_encounter], 0.3)
+
+func _on_theme_toggle_toggled(button_pressed):
+	if button_pressed:
+		$HUD/ThemeToggle.material.set_shader_parameter("dark_mode", true)
+		$Camera3D.environment.background_color = Color("#414141")
+	else:
+		$HUD/ThemeToggle.material.set_shader_parameter("dark_mode", false)
+		$Camera3D.environment.background_color = Color("#FAFAFA")

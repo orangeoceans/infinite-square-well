@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c0kjtb30py00w"]
+[gd_scene load_steps=28 format=3 uid="uid://c0kjtb30py00w"]
 
 [ext_resource type="Script" path="res://assets/scripts/GameplayController.gd" id="1_3kxac"]
 [ext_resource type="Script" path="res://assets/scripts/DialogueSystem.gd" id="1_ay7mc"]
@@ -9,14 +9,17 @@
 [ext_resource type="Texture2D" uid="uid://ceb0bgmcfitla" path="res://assets/sprites/jeff.png" id="3_efu71"]
 [ext_resource type="Script" path="res://assets/scripts/NeedleController.gd" id="3_jcith"]
 [ext_resource type="Texture2D" uid="uid://c8kite4ohj6ij" path="res://assets/sprites/w_clouds.png" id="4_4ixyg"]
-[ext_resource type="Texture2D" uid="uid://b6133vvtd1ccx" path="res://assets/sprites/knob_dark.png" id="4_nordn"]
+[ext_resource type="Material" uid="uid://mijhtsyjdayj" path="res://assets/shaders/light_dark_mat.tres" id="4_j2xs3"]
 [ext_resource type="Texture2D" uid="uid://do5naernrfrbc" path="res://assets/sprites/x_clouds.png" id="5_cxrtp"]
+[ext_resource type="Texture2D" uid="uid://dglfmw2ipe32v" path="res://assets/sprites/knob.png" id="5_uhtxd"]
 [ext_resource type="Texture2D" uid="uid://cc3sx832vtly3" path="res://assets/sprites/ring_x.png" id="5_ygdnb"]
+[ext_resource type="Script" path="res://assets/scripts/TextColorController.gd" id="6_4177h"]
 [ext_resource type="Texture2D" uid="uid://qgd5c3gyljk8" path="res://assets/sprites/y_clouds.png" id="6_m10lw"]
 [ext_resource type="Texture2D" uid="uid://dfvjpls58nvx2" path="res://assets/sprites/ring_y.png" id="6_yfwic"]
 [ext_resource type="Texture2D" uid="uid://ccx3uhdh4rxpx" path="res://assets/sprites/ring_dark.png" id="7_grxxw"]
 [ext_resource type="Texture2D" uid="uid://bljqvuau0fkov" path="res://assets/sprites/z_clouds.png" id="7_q6kx6"]
 [ext_resource type="Texture2D" uid="uid://bnbe6k71nf8bi" path="res://assets/sprites/grid.png" id="8_vx24x"]
+[ext_resource type="Texture2D" uid="uid://c5h1ovjtr2plv" path="res://assets/sprites/dark_mode.png" id="9_4u013"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_sboss"]
 action = &"advance_dialogue"
@@ -67,6 +70,7 @@ texture = ExtResource("2_o88bo")
 script = ExtResource("3_jcith")
 
 [node name="NeedleRect" type="TextureRect" parent="HUD/DialRectW"]
+material = ExtResource("4_j2xs3")
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -79,7 +83,7 @@ offset_right = 100.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(100, 100)
-texture = ExtResource("4_nordn")
+texture = ExtResource("5_uhtxd")
 
 [node name="ValueLabel" type="RichTextLabel" parent="HUD/DialRectW"]
 layout_mode = 0
@@ -87,10 +91,10 @@ offset_left = 47.5
 offset_top = 153.75
 offset_right = 216.5
 offset_bottom = 223.75
-theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/mono_font_size = 36
 bbcode_enabled = true
 text = "[code]00000[/code]"
+script = ExtResource("6_4177h")
 
 [node name="DialRectX" type="TextureRect" parent="HUD"]
 offset_left = 252.0
@@ -103,6 +107,7 @@ script = ExtResource("3_jcith")
 pos_index = 1.0
 
 [node name="NeedleRect" type="TextureRect" parent="HUD/DialRectX"]
+material = ExtResource("4_j2xs3")
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -115,7 +120,7 @@ offset_right = 100.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(100, 100)
-texture = ExtResource("4_nordn")
+texture = ExtResource("5_uhtxd")
 
 [node name="ValueLabel" type="RichTextLabel" parent="HUD/DialRectX"]
 layout_mode = 0
@@ -123,10 +128,10 @@ offset_left = 48.75
 offset_top = 153.75
 offset_right = 217.75
 offset_bottom = 223.75
-theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/mono_font_size = 36
 bbcode_enabled = true
 text = "[code]00000[/code]"
+script = ExtResource("6_4177h")
 
 [node name="DialRectY" type="TextureRect" parent="HUD"]
 offset_left = 447.0
@@ -139,6 +144,7 @@ script = ExtResource("3_jcith")
 pos_index = 2.0
 
 [node name="NeedleRect" type="TextureRect" parent="HUD/DialRectY"]
+material = ExtResource("4_j2xs3")
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -151,7 +157,7 @@ offset_right = 100.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(100, 100)
-texture = ExtResource("4_nordn")
+texture = ExtResource("5_uhtxd")
 
 [node name="ValueLabel" type="RichTextLabel" parent="HUD/DialRectY"]
 layout_mode = 0
@@ -159,10 +165,10 @@ offset_left = 48.75
 offset_top = 153.75
 offset_right = 217.75
 offset_bottom = 223.75
-theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/mono_font_size = 36
 bbcode_enabled = true
 text = "[code]00000[/code]"
+script = ExtResource("6_4177h")
 
 [node name="DialRectZ" type="TextureRect" parent="HUD"]
 offset_left = 641.0
@@ -175,6 +181,7 @@ script = ExtResource("3_jcith")
 pos_index = 3.0
 
 [node name="NeedleRect" type="TextureRect" parent="HUD/DialRectZ"]
+material = ExtResource("4_j2xs3")
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -187,7 +194,7 @@ offset_right = 100.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(100, 100)
-texture = ExtResource("4_nordn")
+texture = ExtResource("5_uhtxd")
 
 [node name="ValueLabel" type="RichTextLabel" parent="HUD/DialRectZ"]
 layout_mode = 0
@@ -195,10 +202,19 @@ offset_left = 48.75
 offset_top = 153.75
 offset_right = 217.75
 offset_bottom = 223.75
-theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/mono_font_size = 36
 bbcode_enabled = true
 text = "[code]00000[/code]"
+script = ExtResource("6_4177h")
+
+[node name="ThemeToggle" type="CheckButton" parent="HUD"]
+material = ExtResource("4_j2xs3")
+offset_right = 60.0
+offset_bottom = 31.0
+scale = Vector2(1.5, 1.5)
+focus_mode = 0
+button_pressed = true
+icon = ExtResource("9_4u013")
 
 [node name="DialogueSystem" type="CanvasLayer" parent="."]
 script = ExtResource("1_ay7mc")
@@ -224,6 +240,7 @@ theme_override_font_sizes/bold_italics_font_size = 24
 theme_override_font_sizes/mono_font_size = 24
 bbcode_enabled = true
 text = "test"
+script = ExtResource("6_4177h")
 
 [node name="InteractButton" type="Button" parent="DialogueSystem"]
 anchors_preset = 8
@@ -269,5 +286,11 @@ top_level = true
 [node name="JeffSprite" type="Sprite3D" parent="FigureSprites"]
 texture = ExtResource("1_hf5ej")
 
+[connection signal="toggled" from="HUD/ThemeToggle" to="." method="_on_theme_toggle_toggled"]
+[connection signal="toggled" from="HUD/ThemeToggle" to="HUD/DialRectW/ValueLabel" method="_on_theme_toggle_toggled"]
+[connection signal="toggled" from="HUD/ThemeToggle" to="HUD/DialRectX/ValueLabel" method="_on_theme_toggle_toggled"]
+[connection signal="toggled" from="HUD/ThemeToggle" to="HUD/DialRectY/ValueLabel" method="_on_theme_toggle_toggled"]
+[connection signal="toggled" from="HUD/ThemeToggle" to="HUD/DialRectZ/ValueLabel" method="_on_theme_toggle_toggled"]
+[connection signal="toggled" from="HUD/ThemeToggle" to="DialogueSystem/DialogueRichtext" method="_on_theme_toggle_toggled"]
 [connection signal="pressed" from="DialogueSystem/InteractButton" to="." method="_on_interact_button_pressed"]
 [connection signal="pressed" from="DialogueSystem/InteractButton" to="DialogueSystem" method="_on_button_pressed"]
