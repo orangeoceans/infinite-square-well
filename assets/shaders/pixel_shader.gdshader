@@ -1,5 +1,7 @@
 shader_type canvas_item;
 
+uniform vec4 pos = vec4(1.0, 1.0, 1.0, 1.0);
+
 uniform sampler2D w_clouds;
 uniform sampler2D x_clouds;
 uniform sampler2D y_clouds;
@@ -9,9 +11,9 @@ uniform sampler2D cloud_gradient;
 uniform sampler2D jeff_texture;
 uniform vec4 jeff_pos = vec4(1.0, 1.0, 1.0, 1.0);
 const vec4 jeff_vecs[] = { 
-	vec4(0.4, 0.8, 0.2, 0.4),
-	vec4(-0.824, 0.137, 0.549, 0.0), 
-	vec4(0.658, -0.658, -0.164, -0.329)
+	vec4(1, 0, 0, 0),
+	vec4(0, 1, 0, 0), 
+	vec4(0, 0, -0.7071, -0.7071)
 };
 
 const float cloud_size = 2048.;
@@ -22,7 +24,7 @@ float point_line_distance(vec4 point, vec4 line_p, vec4 line_v) {
 	// Project point onto line, then calculate distance
 	vec4 v = point - line_p;
 	vec4 closest_p = line_p + (dot(v, line_v) * line_v);
-	return clamp(distance(closest_p, point), 0.0, 1.0);
+	return clamp(distance(closest_p, point)/2., 0.0, 1.0);
 }
 
 void vertex() {
@@ -42,7 +44,7 @@ vec2 stretch_uv(vec2 uv, float phase, float mag, bool x_dir) {
 }
 
 void fragment() {
-	vec4 pos = vec4(sin(TIME)+1., sin(TIME*0.5)+1., sin(TIME*0.8)+1., sin(TIME*1.2)+1.);
+	//vec4 pos = vec4(sin(TIME)+1., sin(TIME*0.5)+1., sin(TIME*0.8)+1., sin(TIME*1.2)+1.);
 	vec4 jeff_sample = texture(jeff_texture, UV); 
 	vec3 jeff_dists = vec3(point_line_distance(pos, jeff_pos, jeff_vecs[0]), point_line_distance(pos, jeff_pos, jeff_vecs[1]), point_line_distance(pos, jeff_pos, jeff_vecs[2]));
 	float r = clamp(jeff_sample[0] - jeff_dists[0], 0.0, 1.0);
@@ -58,7 +60,7 @@ void fragment() {
 
 	// COLOR = clouds_rgb;
 	COLOR = vec4(
-		r + clouds_rgb[0]*jeff_dists[0], 
-		g + clouds_rgb[1]*jeff_dists[1], 
-		b + clouds_rgb[2]*jeff_dists[2], 1.0);	
+		r + clamp(clouds_rgb[0]*(0.5*jeff_dists[0] + 0.3*jeff_dists[1] + 0.3*jeff_dists[2]), 0.0, 1.0), 
+		g + clamp(clouds_rgb[1]*(0.3*jeff_dists[0] + 0.5*jeff_dists[1] + 0.3*jeff_dists[2]), 0.0, 1.0), 
+		b + clamp(clouds_rgb[2]*(0.3*jeff_dists[0] + 0.3*jeff_dists[1] + 0.5*jeff_dists[2]), 0.0, 1.0), 1.0);	
 }
