@@ -14,6 +14,7 @@
 shader = ExtResource("1_gna3i")
 shader_parameter/pos = Vector4(0, 0, 0, 0)
 shader_parameter/jeff_pos = Vector4(0, 0, 0, 0)
+shader_parameter/max_pos = 100.0
 shader_parameter/w_clouds = ExtResource("3_0ovnu")
 shader_parameter/x_clouds = ExtResource("4_ct6wk")
 shader_parameter/y_clouds = ExtResource("5_0x1rx")
