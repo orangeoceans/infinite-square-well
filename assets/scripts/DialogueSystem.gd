@@ -4,7 +4,7 @@ extends CanvasLayer
 @export var nearest_encounter_dist: float
 
 var dialogue_enabled = false
-var dialogues = ["Hello my name is Jeff Goldblum.", "I am a famous actor who played Dr. Ian Malcolm in Jurassic Park.", "I must say you look quite ravishing today."]
+var encounter_text = {"jeff": ["Hello my name is Jeff Goldblum.", "I am a famous actor who played Dr. Ian Malcolm in Jurassic Park.", "I must say you look quite ravishing today."]}
 var dialogue_index = 0
 var dialogue_open = false
 var char_per_sec = 20.
@@ -13,13 +13,16 @@ var text_tween
 var button_tween
 
 func update_dialogue():
-	if dialogue_index < dialogues.size():
-		$DialogueRichtext.text = dialogues[dialogue_index]
+	if dialogue_index < encounter_text[nearest_encounter].size():
+		$DialogueRichtext.text = encounter_text[nearest_encounter][dialogue_index]
 		if text_tween:
 			text_tween.kill()
 		$DialogueRichtext.visible_ratio = 0.
 		text_tween = get_tree().create_tween()
-		text_tween.tween_property($DialogueRichtext, "visible_ratio", 1., len(dialogues[dialogue_index])/char_per_sec)
+		text_tween.tween_property($DialogueRichtext, 
+			"visible_ratio", 1., 
+			len(encounter_text[nearest_encounter][dialogue_index])/char_per_sec
+		)
 		dialogue_index += 1
 	else:
 		dialogue_index = 0
