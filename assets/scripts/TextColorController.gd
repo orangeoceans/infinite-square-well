@@ -2,7 +2,7 @@ extends RichTextLabel
 
 var raw_text: String = "00000"
 var light_color = "#4f4f4f"
-var dark_color = "#b0b0b0"
+var dark_color = "#c0c0c0"
 var theme_toggle: CheckButton
 
 func _ready():
@@ -17,6 +17,6 @@ func update_text():
 		else ("[color=%s]" % [light_color])+raw_text+"[/color]")
 	self.parse_bbcode(self.text)
 
-func _on_theme_toggle_toggled(button_pressed):
+func _on_theme_toggle_toggled(_button_pressed):
 	update_text()
 

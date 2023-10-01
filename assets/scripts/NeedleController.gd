@@ -10,7 +10,6 @@ var root_node;
 
 func update_dial(val):
 	var normalized_val = val/root_node.max_pos
-	print(normalized_val)
 	$NeedleRect.rotation_degrees = min_angle + diff_angle*normalized_val
 	$ValueLabel.raw_text = "[code]%05d[/code]" % [val*100.]
 	$ValueLabel.update_text()

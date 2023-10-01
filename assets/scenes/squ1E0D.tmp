@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c0kjtb30py00w"]
+[gd_scene load_steps=28 format=3 uid="uid://c0kjtb30py00w"]
 
 [ext_resource type="Script" path="res://assets/scripts/GameplayController.gd" id="1_3kxac"]
 [ext_resource type="Script" path="res://assets/scripts/DialogueSystem.gd" id="1_ay7mc"]
@@ -20,7 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://bljqvuau0fkov" path="res://assets/sprites/z_clouds.png" id="7_q6kx6"]
 [ext_resource type="Texture2D" uid="uid://bnbe6k71nf8bi" path="res://assets/sprites/grid.png" id="8_vx24x"]
 [ext_resource type="Texture2D" path="res://assets/sprites/dark_mode.png" id="9_4u013"]
-[ext_resource type="Texture2D" uid="uid://dfv0e6rhfwrw6" path="res://assets/sprites/dialogue_box.png" id="12_n0scj"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_sboss"]
 action = &"advance_dialogue"
@@ -227,10 +226,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -382.0
-offset_top = 121.0
-offset_right = 386.0
-offset_bottom = 382.0
+offset_left = -406.0
+offset_top = 134.0
+offset_right = 404.0
+offset_bottom = 411.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
@@ -242,17 +241,6 @@ theme_override_font_sizes/mono_font_size = 24
 bbcode_enabled = true
 text = "test"
 script = ExtResource("6_4177h")
-
-[node name="DialogueBox" type="TextureRect" parent="DialogueSystem/DialogueRichtext"]
-show_behind_parent = true
-top_level = true
-z_index = -10
-material = ExtResource("4_j2xs3")
-offset_left = 29.0
-offset_top = 533.0
-offset_right = 829.0
-offset_bottom = 833.0
-texture = ExtResource("12_n0scj")
 
 [node name="InteractButton" type="Button" parent="DialogueSystem"]
 anchors_preset = 8
@@ -288,7 +276,7 @@ visible = false
 text = "(0, 0, 0, 0)"
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.390731, 0.920505, 0, -0.920505, 0.390731, 0, 1.64, 1.32)
+transform = Transform3D(1, 0, 0, 0, 0.388191, 0.921579, 0, -0.921579, 0.388191, 0, 1.32396, 1.32103)
 environment = SubResource("Environment_akhw1")
 
 [node name="FigureSprites" type="Node3D" parent="."]
