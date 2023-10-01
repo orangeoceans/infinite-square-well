@@ -38,14 +38,14 @@ vec2 stretch_uv(vec2 uv, float phase, float mag, bool x_dir) {
 }
 
 void fragment() {
-	float r, g, b;
+	float r = 0., g = 0., b = 0.;
 	vec3 nearest_dist = vec3(99999., 99999., 99999.);
 	for (int i = 0; i < num_keypoints; i++) {
 		vec3 point_line_dist = point_line_dists[i];
 		vec4 key_sample = texture(key_textures[i], UV); 
-		r = clamp(key_sample[0] - point_line_dist[0], 0.0, 1.0);
-		g = clamp(key_sample[1] - point_line_dist[1], 0.0, 1.0);
-		b = clamp(key_sample[2] - point_line_dist[2], 0.0, 1.0);
+		r += clamp(key_sample[0] - point_line_dist[0], 0.0, 1.0);
+		g += clamp(key_sample[1] - point_line_dist[1], 0.0, 1.0);
+		b += clamp(key_sample[2] - point_line_dist[2], 0.0, 1.0);
 		if (point_line_dist[0] < nearest_dist[0])
 			nearest_dist[0] = point_line_dist[0];
 		if (point_line_dist[1] < nearest_dist[1])

@@ -19,6 +19,9 @@ var keypoint_vec = {
 	]
 }
 
+var keypoint_fig_path = {"jeff": "/root/square_3D/FigureSprites/JeffSprite"}
+var keypoint_fig = {}
+
 func _ready():
 	# Make sure the node has a material and that it's a ShaderMaterial
 	assert(self.material is ShaderMaterial)
@@ -26,6 +29,8 @@ func _ready():
 	pos_label.text = str(pos)
 	self.material.set_shader_parameter("pos", pos)
 	self.material.set_shader_parameter("max_pos", max_pos)
+	for key in keypoint_fig_path:
+		keypoint_fig[key] = get_node(keypoint_fig_path[key])
 
 func _process(delta):
 	if Input.is_key_pressed(KEY_Q):
@@ -66,6 +71,9 @@ func modify_pos(index: int, amount: float):
 				point_line_distance(pos, keypoint_pos[key], keypoint_vec[key][2]),
 			)
 		)
+		var keypoint_dist = keypoint_pos[key].distance_to(pos)
+		keypoint_fig[key].modulate.a = clamp(1. - keypoint_dist**2, 0., 1.)
+		keypoint_fig[key].position.y = 0. - keypoint_dist**2
 	self.material.set_shader_parameter("point_line_dists", point_line_dists)
 	self.material.set_shader_parameter("pos", pos)
 	pos_label.text = str(pos)
