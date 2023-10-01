@@ -12,13 +12,13 @@ var speak_dist = 0.75
 var text_tween
 var button_tween
 var camera_tween
+var dialogue_tween
 
 var camera: Camera3D
 
 func update_dialogue():
 	if dialogue_index < encounter_text[nearest_encounter].size():
-		$DialogueRichtext.raw_text = encounter_text[nearest_encounter][dialogue_index]
-		$DialogueRichtext.update_text()
+		$DialogueRichtext.text = encounter_text[nearest_encounter][dialogue_index] 
 		if text_tween:
 			text_tween.kill()
 		$DialogueRichtext.visible_ratio = 0.
@@ -30,7 +30,11 @@ func update_dialogue():
 		dialogue_index += 1
 	else:
 		dialogue_index = 0
-		$DialogueRichtext.hide()
+		if dialogue_tween:
+			dialogue_tween.kill()
+		dialogue_tween = get_tree().create_tween().set_parallel(true)
+		dialogue_tween.tween_property($DialogueRichtext, "position", Vector2(48,890), 0.2)
+		dialogue_tween.tween_property($DialogueRichtext, "modulate", Color(1,1,1,0), 0.2)
 		if camera_tween:
 			camera_tween.kill()
 		camera_tween = get_tree().create_tween().set_parallel(true)
@@ -40,8 +44,12 @@ func update_dialogue():
 		camera_tween.tween_property(camera, 
 			"rotation", Vector3(-1.17, 0., 0.), 0.3
 		)
-		await get_tree().create_timer(0.5).timeout
-		$InteractButton.show()
+		await get_tree().create_timer(0.3).timeout
+		if button_tween:
+			button_tween.kill()
+		button_tween = get_tree().create_tween()
+		button_tween.tween_property($InteractButton, "modulate", Color(1,1,1,1), 0.2)
+		await get_tree().create_timer(0.2).timeout
 		dialogue_open = false
 
 var button_press_finished = true
@@ -51,8 +59,15 @@ func _on_button_pressed():
 	dialogue_open = true
 	button_press_finished = false
 	dialogue_index = 0
-	$InteractButton.hide()
-	$DialogueRichtext.show()
+	if button_tween:
+		button_tween.kill()
+	button_tween = get_tree().create_tween()
+	button_tween.tween_property($InteractButton, "modulate", Color(1,1,1,0), 0.2)
+	if dialogue_tween:
+		dialogue_tween.kill()
+	dialogue_tween = get_tree().create_tween().set_parallel(true)
+	dialogue_tween.tween_property($DialogueRichtext, "position", Vector2(48,550), 0.3)
+	dialogue_tween.tween_property($DialogueRichtext, "modulate", Color(1,1,1,1), 0.3)
 	if camera_tween:
 		camera_tween.kill()
 	camera_tween = get_tree().create_tween().set_parallel(true)
