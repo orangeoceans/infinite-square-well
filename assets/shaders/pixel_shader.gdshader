@@ -8,13 +8,9 @@ uniform sampler2D y_clouds;
 uniform sampler2D z_clouds;
 uniform sampler2D cloud_gradient;
 
-uniform sampler2D jeff_texture;
-uniform vec4 jeff_pos = vec4(1.0, 1.0, 1.0, 1.0);
-const vec4 jeff_vecs[] = { 
-	vec4(1, 0, 0, 0),
-	vec4(0, 1, 0, 0), 
-	vec4(0, 0, 0.7071, 0.7071)
-};
+const int num_keypoints = 1;
+uniform sampler2D[num_keypoints] key_textures;
+uniform vec3[num_keypoints] point_line_dists;
 
 uniform float max_pos = 100;
 
@@ -42,12 +38,21 @@ vec2 stretch_uv(vec2 uv, float phase, float mag, bool x_dir) {
 }
 
 void fragment() {
-	//vec4 pos = vec4(sin(TIME)+1., sin(TIME*0.5)+1., sin(TIME*0.8)+1., sin(TIME*1.2)+1.);
-	vec4 jeff_sample = texture(jeff_texture, UV); 
-	vec3 jeff_dists = vec3(point_line_distance(pos, jeff_pos, jeff_vecs[0]), point_line_distance(pos, jeff_pos, jeff_vecs[1]), point_line_distance(pos, jeff_pos, jeff_vecs[2]));
-	float r = clamp(jeff_sample[0] - jeff_dists[0], 0.0, 1.0);
-	float g = clamp(jeff_sample[1] - jeff_dists[1], 0.0, 1.0);
-	float b = clamp(jeff_sample[2] - jeff_dists[2], 0.0, 1.0);
+	float r, g, b;
+	vec3 nearest_dist = vec3(99999., 99999., 99999.);
+	for (int i = 0; i < num_keypoints; i++) {
+		vec3 point_line_dist = point_line_dists[i];
+		vec4 key_sample = texture(key_textures[i], UV); 
+		r = clamp(key_sample[0] - point_line_dist[0], 0.0, 1.0);
+		g = clamp(key_sample[1] - point_line_dist[1], 0.0, 1.0);
+		b = clamp(key_sample[2] - point_line_dist[2], 0.0, 1.0);
+		if (point_line_dist[0] < nearest_dist[0])
+			nearest_dist[0] = point_line_dist[0];
+		if (point_line_dist[1] < nearest_dist[1])
+			nearest_dist[1] = point_line_dist[1];
+		if (point_line_dist[2] < nearest_dist[2])
+			nearest_dist[2] = point_line_dist[2];
+	}
 	
 	float w_clouds_sample = texture(w_clouds, calc_cloud_uv(vec2(pos[0],pos[1]), stretch_uv(1.-UV, pos[0]+pos[3], 0.2, true)))[0]/4.;
 	float x_clouds_sample = texture(x_clouds, calc_cloud_uv(vec2(pos[0],pos[1]), stretch_uv(UV, pos[1]+pos[2], 0.2, false)))[0]/4.;
@@ -58,7 +63,7 @@ void fragment() {
 
 	// COLOR = clouds_rgb;
 	COLOR = vec4(
-		r + clamp(clouds_rgb[0]*(0.5*jeff_dists[0] + 0.3*jeff_dists[1] + 0.3*jeff_dists[2]), 0.0, 1.0), 
-		g + clamp(clouds_rgb[1]*(0.3*jeff_dists[0] + 0.5*jeff_dists[1] + 0.3*jeff_dists[2]), 0.0, 1.0), 
-		b + clamp(clouds_rgb[2]*(0.3*jeff_dists[0] + 0.3*jeff_dists[1] + 0.5*jeff_dists[2]), 0.0, 1.0), 1.0);	
+		r + clamp(clouds_rgb[0]*(0.6*nearest_dist[0] + 0.2*nearest_dist[1] + 0.2*nearest_dist[2]), 0.0, 1.0), 
+		g + clamp(clouds_rgb[1]*(0.2*nearest_dist[0] + 0.6*nearest_dist[1] + 0.2*nearest_dist[2]), 0.0, 1.0), 
+		b + clamp(clouds_rgb[2]*(0.2*nearest_dist[0] + 0.2*nearest_dist[1] + 0.6*nearest_dist[2]), 0.0, 1.0), 1.0);
 }
