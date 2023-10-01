@@ -1,10 +1,16 @@
 extends CanvasLayer
 
+@export var nearest_encounter: String
+@export var nearest_encounter_dist: float
+
+var dialogue_enabled = false
 var dialogues = ["Hello my name is Jeff Goldblum.", "I am a famous actor who played Dr. Ian Malcolm in Jurassic Park.", "I must say you look quite ravishing today."]
 var dialogue_index = 0
 var dialogue_open = false
 var char_per_sec = 20.
+var speak_dist = 0.75
 var text_tween
+var button_tween
 
 func update_dialogue():
 	if dialogue_index < dialogues.size():
@@ -24,7 +30,7 @@ func update_dialogue():
 
 var button_press_finished = true
 func _on_button_pressed():
-	if dialogue_open or not button_press_finished:
+	if dialogue_open or not button_press_finished or not dialogue_enabled:
 		return
 	dialogue_open = true
 	button_press_finished = false
@@ -47,10 +53,14 @@ func _input(event):
 			update_dialogue()
 	input_finished = true
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	nearest_encounter = ""
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _process(_delta):
+	var dialogue_to_enable = (nearest_encounter_dist <= speak_dist)
+	if dialogue_enabled != dialogue_to_enable:
+		if button_tween:
+			button_tween.kill()
+		button_tween = get_tree().create_tween()
+		button_tween.tween_property($InteractButton, "modulate", Color(1, 1, 1, int(dialogue_to_enable)), 0.3)
+	dialogue_enabled = dialogue_to_enable

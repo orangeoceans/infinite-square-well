@@ -1,9 +1,10 @@
 extends Node3D
 
-# Speed to modify the vec4 components
 var speed: float = 0.05
 var max_pos: float = 100.
-var pos: Vector4
+
+@export var pos: Vector4
+var can_move: bool = true
 
 var square_sprite: Sprite2D;
 var pos_label: Label3D
@@ -23,6 +24,8 @@ var keypoint_vec = {
 var keypoint_fig_path = {"jeff": "/root/square_3D/FigureSprites/JeffSprite"}
 var keypoint_fig = {}
 
+var pos_tween
+
 func _ready():
 	square_sprite = $SquareMesh/SquareViewport/SquareSprite
 	pos_label = $PositionLabel
@@ -35,26 +38,30 @@ func _ready():
 	for key in keypoint_fig_path:
 		keypoint_fig[key] = get_node(keypoint_fig_path[key])
 
-func _process(delta):
-	if Input.is_key_pressed(KEY_Q):
-		modify_pos(0, speed)
-	elif Input.is_key_pressed(KEY_A):
-		modify_pos(0, -speed)
-		
-	if Input.is_key_pressed(KEY_W):
-		modify_pos(1, speed)
-	elif Input.is_key_pressed(KEY_S):
-		modify_pos(1, -speed)
+func _process(_delta):
+	can_move = not $DialogueSystem.dialogue_open
 
-	if Input.is_key_pressed(KEY_E):
-		modify_pos(2, speed)
-	elif Input.is_key_pressed(KEY_D):
-		modify_pos(2, -speed)
-		
-	if Input.is_key_pressed(KEY_R):
-		modify_pos(3, speed)
-	elif Input.is_key_pressed(KEY_F):
-		modify_pos(3, -speed)
+	if can_move:
+		if Input.is_key_pressed(KEY_Q):
+			modify_pos(0, speed)
+		elif Input.is_key_pressed(KEY_A):
+			modify_pos(0, -speed)
+			
+		if Input.is_key_pressed(KEY_W):
+			modify_pos(1, speed)
+		elif Input.is_key_pressed(KEY_S):
+			modify_pos(1, -speed)
+
+		if Input.is_key_pressed(KEY_E):
+			modify_pos(2, speed)
+		elif Input.is_key_pressed(KEY_D):
+			modify_pos(2, -speed)
+			
+		if Input.is_key_pressed(KEY_R):
+			modify_pos(3, speed)
+		elif Input.is_key_pressed(KEY_F):
+			modify_pos(3, -speed)
+	update_square()
 
 func point_line_distance(point: Vector4, line_p: Vector4, line_v: Vector4) -> float:
 	# Project point onto line, then calculate distance
@@ -65,7 +72,10 @@ func point_line_distance(point: Vector4, line_p: Vector4, line_v: Vector4) -> fl
 func modify_pos(index: int, amount: float):
 	pos[index] = clamp(pos[index] + amount, 0.0, max_pos)
 	
+func update_square():
 	var point_line_dists = []
+	var nearest_keypoint = ""
+	var nearest_keypoint_dist = 9999999
 	for key in keypoint_pos:
 		point_line_dists.append(
 			Vector3(
@@ -75,10 +85,18 @@ func modify_pos(index: int, amount: float):
 			)
 		)
 		var keypoint_dist = keypoint_pos[key].distance_to(pos)
+		if keypoint_dist < nearest_keypoint_dist:
+			nearest_keypoint_dist = keypoint_dist
+			nearest_keypoint = key
 		keypoint_fig[key].modulate.a = clamp(1. - keypoint_dist**2, 0., 1.)
 		keypoint_fig[key].position.y = 0. - keypoint_dist**2
+	$DialogueSystem.nearest_encounter = nearest_keypoint
+	$DialogueSystem.nearest_encounter_dist = nearest_keypoint_dist
+	
 	square_sprite.material.set_shader_parameter("point_line_dists", point_line_dists)
 	square_sprite.material.set_shader_parameter("pos", pos)
 	pos_label.text = str(pos)
 
-
+func _on_interact_button_pressed():
+	pos_tween = get_tree().create_tween()
+	pos_tween.tween_property(self, "pos", keypoint_pos[$DialogueSystem.nearest_encounter], 0.3)

@@ -105,4 +105,5 @@ top_level = true
 [node name="JeffSprite" type="Sprite3D" parent="FigureSprites"]
 texture = ExtResource("1_hf5ej")
 
+[connection signal="pressed" from="DialogueSystem/InteractButton" to="." method="_on_interact_button_pressed"]
 [connection signal="pressed" from="DialogueSystem/InteractButton" to="DialogueSystem" method="_on_button_pressed"]
