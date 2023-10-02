@@ -4,7 +4,15 @@ extends CanvasLayer
 @export var nearest_encounter_dist: float
 
 var can_talk = false
-var encounter_text = {"jeff": ["Hello my name is Jeff Goldblum.", "I am a famous actor who played Dr. Ian Malcolm in Jurassic Park.", "I must say you look quite ravishing today."]}
+var all_encounter_text = {"jeff": 
+	{
+		"start": ["Hello my name is Jeff Goldblum.", "I am a famous actor who played Dr. Ian Malcolm in Jurassic Park.", "I must say you look quite ravishing today.", {"jeff": "end"}],
+		"end": ["I've already talked with you.", {}]
+	}
+}
+var encounter_flags = {
+	"jeff": "start"
+}
 var dialogue_index = 0
 var dialogue_open = false
 var char_per_sec = 40.
@@ -16,41 +24,48 @@ var dialogue_tween
 
 var camera: Camera3D
 
+func end_dialogue():
+	dialogue_index = 0
+	if dialogue_tween:
+		dialogue_tween.kill()
+	dialogue_tween = get_tree().create_tween().set_parallel(true)
+	dialogue_tween.tween_property($DialogueRichtext, "position", Vector2(48,890), 0.2)
+	dialogue_tween.tween_property($DialogueRichtext, "modulate", Color(1,1,1,0), 0.2)
+	if camera_tween:
+		camera_tween.kill()
+	camera_tween = get_tree().create_tween().set_parallel(true)
+	camera_tween.tween_property(camera, 
+		"position", Vector3(0., 1.64, 1.32), 0.3
+	)
+	camera_tween.tween_property(camera, 
+		"rotation", Vector3(-1.17, 0., 0.), 0.3
+	)
+	await get_tree().create_timer(0.3).timeout
+	if button_tween:
+		button_tween.kill()
+	button_tween = get_tree().create_tween()
+	button_tween.tween_property($InteractButton, "modulate", Color(1,1,1,1), 0.2)
+	await get_tree().create_timer(0.2).timeout
+	dialogue_open = false
+
 func update_dialogue():
-	if dialogue_index < encounter_text[nearest_encounter].size():
-		$DialogueRichtext.text = encounter_text[nearest_encounter][dialogue_index] 
+	var encounter_text = all_encounter_text[nearest_encounter][encounter_flags[nearest_encounter]][dialogue_index]
+	if encounter_text is String:
+		$DialogueRichtext.text = encounter_text
 		if text_tween:
 			text_tween.kill()
 		$DialogueRichtext.visible_ratio = 0.
 		text_tween = get_tree().create_tween()
 		text_tween.tween_property($DialogueRichtext, 
 			"visible_ratio", 1., 
-			len(encounter_text[nearest_encounter][dialogue_index])/char_per_sec
+			len(encounter_text)/char_per_sec
 		)
 		dialogue_index += 1
 	else:
-		dialogue_index = 0
-		if dialogue_tween:
-			dialogue_tween.kill()
-		dialogue_tween = get_tree().create_tween().set_parallel(true)
-		dialogue_tween.tween_property($DialogueRichtext, "position", Vector2(48,890), 0.2)
-		dialogue_tween.tween_property($DialogueRichtext, "modulate", Color(1,1,1,0), 0.2)
-		if camera_tween:
-			camera_tween.kill()
-		camera_tween = get_tree().create_tween().set_parallel(true)
-		camera_tween.tween_property(camera, 
-			"position", Vector3(0., 1.64, 1.32), 0.3
-		)
-		camera_tween.tween_property(camera, 
-			"rotation", Vector3(-1.17, 0., 0.), 0.3
-		)
-		await get_tree().create_timer(0.3).timeout
-		if button_tween:
-			button_tween.kill()
-		button_tween = get_tree().create_tween()
-		button_tween.tween_property($InteractButton, "modulate", Color(1,1,1,1), 0.2)
-		await get_tree().create_timer(0.2).timeout
-		dialogue_open = false
+		for encounter in encounter_text:
+			encounter_flags[encounter] = encounter_text[encounter]
+		end_dialogue()
+
 
 var button_press_finished = true
 func _on_button_pressed():

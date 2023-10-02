@@ -310,7 +310,6 @@ grow_vertical = 2
 focus_mode = 0
 mouse_default_cursor_shape = 2
 action_mode = 0
-shortcut = SubResource("Shortcut_qbce5")
 text = "Recenter"
 
 [node name="IntroTransition" type="TextureRect" parent="HUD"]

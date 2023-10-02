@@ -6,6 +6,7 @@ var max_pos: float = 100.
 @export var pos: Vector4
 var center_pos: Vector4 = Vector4(50., 50., 50., 50.)
 var last_pos: Vector4
+
 var can_move: bool = false
 
 var square_sprite: Sprite2D;
@@ -91,7 +92,7 @@ func update_square():
 			)
 		)
 		var keypoint_dist = keypoint_pos[key].distance_to(pos)
-		if keypoint_dist < nearest_encounter_dist and key in $DialogueSystem.encounter_text:
+		if keypoint_dist < nearest_encounter_dist and key in $DialogueSystem.all_encounter_text:
 			nearest_encounter_dist = keypoint_dist
 			nearest_encounter = key
 		keypoint_fig[key].modulate.a = clamp(1. - keypoint_dist**2, 0., 1.)
