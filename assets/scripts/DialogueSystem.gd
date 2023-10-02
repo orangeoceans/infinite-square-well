@@ -6,7 +6,8 @@ extends CanvasLayer
 var can_talk = false
 var all_encounter_text
 var encounter_flags = {
-	"statue": "start"
+	"statue": "start",
+	"trumpet": "start"
 }
 var dialogue_index = 0
 var dialogue_open = false

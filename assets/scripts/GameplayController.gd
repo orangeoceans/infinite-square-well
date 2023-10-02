@@ -13,8 +13,11 @@ var tutorial: bool = true
 var square_sprite: Sprite2D;
 var pos_label: Label3D
 
+var keypoints = ["statue", "trumpet"]
+
 var keypoint_pos = {
-	"statue": Vector4(50., 50., 50., 50.)
+	"statue": Vector4(50., 50., 50., 50.),
+	"trumpet": Vector4(50., 50., 73., 50.)
 }
 
 var keypoint_vec = {
@@ -22,10 +25,17 @@ var keypoint_vec = {
 		Vector4(1., 0., 0., 0.),
 		Vector4(0., 1., 0., 0.),
 		Vector4(0., 0., 1., 0.),
+	],
+	"trumpet": [
+		Vector4(0., 0., 1., 0.),
+		Vector4(0., 0., 0., 1.),
+		Vector4(1., 0., 0., 0.),
 	]
 }
 
-var keypoint_fig_path = {"statue": "/root/square_3D/FigureSprites/StatueSprite"}
+var keypoint_fig_path = {
+	"statue": "/root/square_3D/FigureSprites/StatueSprite",
+	"trumpet": "/root/square_3D/FigureSprites/TrumpetSprite"}
 var keypoint_fig = {}
 
 var pos_tween
@@ -43,7 +53,7 @@ func _ready():
 	pos_label = $PositionLabel
 	# Make sure the node has a material and that it's a ShaderMaterial
 	assert(square_sprite.material is ShaderMaterial)
-	pos = Vector4(45., 50., 50., 50.)
+	pos = Vector4(30., 50., 50., 50.)
 	last_pos = pos
 	pos_label.text = str(pos)
 	square_sprite.material.set_shader_parameter("pos", pos)
@@ -95,7 +105,7 @@ func update_square():
 	var point_line_dists = []
 	var nearest_encounter = ""
 	var nearest_encounter_dist = 9999999
-	for key in keypoint_pos:
+	for key in keypoints:
 		point_line_dists.append(
 			Vector3(
 				point_line_distance(pos, keypoint_pos[key], keypoint_vec[key][0]),
@@ -111,7 +121,10 @@ func update_square():
 		keypoint_fig[key].position.y = 0.83 - keypoint_dist**1.5
 	$DialogueSystem.nearest_encounter = nearest_encounter
 	$DialogueSystem.nearest_encounter_dist = nearest_encounter_dist
-	
+	if nearest_encounter_dist <= $DialogueSystem.speak_dist:
+		square_sprite.material.set_shader_parameter("near_key_index", keypoints.find(nearest_encounter))
+	else:
+		square_sprite.material.set_shader_parameter("near_key_index", -1)
 	square_sprite.material.set_shader_parameter("point_line_dists", point_line_dists)
 	square_sprite.material.set_shader_parameter("pos", pos)
 	pos_label.text = "%.2f %.2f %.2f %.2f" % [pos[0], pos[1], pos[2], pos[3]]
