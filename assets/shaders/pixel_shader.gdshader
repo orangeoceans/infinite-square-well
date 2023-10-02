@@ -8,7 +8,7 @@ uniform sampler2D y_clouds;
 uniform sampler2D z_clouds;
 uniform sampler2D cloud_gradient;
 
-const int num_keypoints = 2;
+const int num_keypoints = 3;
 uniform sampler2D[num_keypoints] key_textures;
 uniform vec3[num_keypoints] point_line_dists;
 

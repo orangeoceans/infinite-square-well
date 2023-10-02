@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://c0kjtb30py00w"]
+[gd_scene load_steps=57 format=3 uid="uid://c0kjtb30py00w"]
 
 [ext_resource type="Script" path="res://assets/scripts/GameplayController.gd" id="1_3kxac"]
 [ext_resource type="Script" path="res://assets/scripts/DialogueSystem.gd" id="1_ay7mc"]
@@ -22,14 +22,20 @@
 [ext_resource type="Texture2D" uid="uid://bnbe6k71nf8bi" path="res://assets/sprites/grid.png" id="8_vx24x"]
 [ext_resource type="Texture2D" uid="uid://c5h1ovjtr2plv" path="res://assets/sprites/dark_mode.png" id="9_4u013"]
 [ext_resource type="Texture2D" uid="uid://byp84scqf485t" path="res://assets/sprites/bg_empty.png" id="9_5j71c"]
+[ext_resource type="Texture2D" uid="uid://66ycqmq2vjkl" path="res://assets/sprites/bg_forest.png" id="10_j2a5t"]
+[ext_resource type="Texture2D" uid="uid://ctyk4f8d5lonc" path="res://assets/sprites/bg_siren.png" id="11_6np4d"]
 [ext_resource type="PackedScene" uid="uid://dvk5i6al8p5om" path="res://assets/scenes/BGM.tscn" id="11_h7rot"]
 [ext_resource type="Texture2D" uid="uid://dfv0e6rhfwrw6" path="res://assets/sprites/dialogue_box.png" id="12_n0scj"]
+[ext_resource type="Texture2D" uid="uid://qsd6q8qw6ph" path="res://assets/sprites/bg_bubbles.png" id="12_pnqc8"]
 [ext_resource type="Texture2D" uid="uid://c4wonewpq6xj4" path="res://assets/sprites/figure_statue.png" id="13_ugaoy"]
 [ext_resource type="Texture2D" uid="uid://mt0migfaes2r" path="res://assets/sprites/figure_trumpet.png" id="15_obr3b"]
 [ext_resource type="Texture2D" uid="uid://dgdomc6uecr7m" path="res://assets/sprites/figure_salt.png" id="17_77v8s"]
+[ext_resource type="Texture2D" uid="uid://dj5rwyof1lbqa" path="res://assets/sprites/figure_ghost.png" id="18_oxncn"]
 [ext_resource type="Texture2D" uid="uid://bthia21sfxxqa" path="res://assets/sprites/A_key.png" id="19_5dkhb"]
 [ext_resource type="Script" path="res://assets/scripts/BGM.gd" id="19_7c6t8"]
+[ext_resource type="Texture2D" uid="uid://25cvcwsj4ebf" path="res://assets/sprites/figure_siren.png" id="19_hrio7"]
 [ext_resource type="Texture2D" uid="uid://bocmovkuspf4e" path="res://assets/sprites/W_key.png" id="19_jm64m"]
+[ext_resource type="Texture2D" uid="uid://cs1s5xanr5ihi" path="res://assets/sprites/figure_bubbles.png" id="20_58rqc"]
 [ext_resource type="Texture2D" uid="uid://852nuuphpfcd" path="res://assets/sprites/Q_key.png" id="20_b5e6q"]
 [ext_resource type="Script" path="res://assets/scripts/IntroScreenController.gd" id="21_fl1jq"]
 [ext_resource type="Texture2D" uid="uid://b6c1eslkghybm" path="res://assets/sprites/intro_bg.png" id="21_i3hi0"]
@@ -71,7 +77,7 @@ shader_parameter/x_clouds = ExtResource("5_cxrtp")
 shader_parameter/y_clouds = ExtResource("6_m10lw")
 shader_parameter/z_clouds = ExtResource("7_q6kx6")
 shader_parameter/cloud_gradient = ExtResource("2_p60up")
-shader_parameter/key_textures = Array[Texture2D]([ExtResource("7_1tdsr"), ExtResource("8_csdby"), ExtResource("9_5j71c")])
+shader_parameter/key_textures = Array[Texture2D]([ExtResource("7_1tdsr"), ExtResource("8_csdby"), ExtResource("9_5j71c"), ExtResource("9_5j71c"), ExtResource("10_j2a5t"), ExtResource("11_6np4d"), ExtResource("12_pnqc8")])
 
 [sub_resource type="Environment" id="Environment_akhw1"]
 background_mode = 1
@@ -186,6 +192,18 @@ texture = ExtResource("15_obr3b")
 [node name="SaltSprite" type="Sprite3D" parent="FigureSprites"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, 1.245, -1.0545)
 texture = ExtResource("17_77v8s")
+
+[node name="GhostSprite" type="Sprite3D" parent="FigureSprites"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, 1.245, -1.0545)
+texture = ExtResource("18_oxncn")
+
+[node name="SirenSprite" type="Sprite3D" parent="FigureSprites"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, 1.245, -1.0545)
+texture = ExtResource("19_hrio7")
+
+[node name="BubblesSprite" type="Sprite3D" parent="FigureSprites"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, 1.245, -1.0545)
+texture = ExtResource("20_58rqc")
 
 [node name="BGM" parent="." instance=ExtResource("11_h7rot")]
 script = ExtResource("19_7c6t8")

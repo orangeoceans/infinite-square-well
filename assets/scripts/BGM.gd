@@ -13,7 +13,7 @@ var keypoint_streams = {
 	"salt": $chime
 }
 
-func linear_to_db(linear):
+func linear_to_log(linear):
 	if linear <= 0:
 		return -80.0 # a very low value to represent silence
 	else:
@@ -29,8 +29,8 @@ func update_audio():
 			current_stream.playing = true
 		var normalized_dist = dist/audible_dist
 	
-		$ambience.volume_db = linear_to_db(normalized_dist)
-		current_stream.volume_db = linear_to_db(1. - normalized_dist)
+		$ambience.volume_db = linear_to_log(normalized_dist)
+		current_stream.volume_db = linear_to_log(1. - normalized_dist)
 		prev_dist = dist
 	elif dist != prev_dist:
 		if current_stream:

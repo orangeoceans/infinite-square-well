@@ -2,7 +2,7 @@ extends Control
 
 var statue_encounter_text = {
 	"start": [
-		"A bright-eyed crow emerges from the static. It tilts its head back and opens its beak to say:",
+		"A bright-eyed crow emerges from the static, perched atop an overgrown statue. It tilts its head back and opens its beak to say:",
 		"[color=yellow](CROW)[/color] CAW! CAW! CAW!",
 		"[color=yellow](CROW)[/color] CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW!",
 		"[color=yellow](CROW)[/color] CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW! CAW!",
@@ -97,7 +97,7 @@ var salt_encounter_text = {
 		"[color=yellow](SGT. SALT)[/color] Why yes, I am from outside this world. I lost my partner Bubbles when we arrived here, in fact. I fear he cannot be left alone for too long.",
 		"[color=yellow](SGT. SALT)[/color] His... let's say... [i]ruff[/i] nature can be effective in our missions, but when unsupervised, he...",
 		"[color=yellow](SGT. SALT)[/color] Ahem. Never mind that.",
-		"[color=yellow](SGT. SALT)[/color] I got separated from Bubbles somewhere over the forest, I believe. It's a bit of a journey to get there. [color=aqua]First, you want to shift S-ward from here, until you just start to see purple. Then, turn A-ward, and you should get to the forest's shadow in due time. From there, you can get to the heart of the forest by following the shadow F-ward.[/color] I am not sure where in the forest my colleague might be, however.",
+		"[color=yellow](SGT. SALT)[/color] I got separated from Bubbles somewhere over the forest, I believe. It's a bit of a journey to get there. [color=aqua]First, you want to shift S-ward from here, until you just start to see purple. Then, turn A-ward, and you should get to the forest's shadow in due time. From there, you can get to the heart of the forest by following the shadow R-ward.[/color] I am not sure where in the forest my colleague might be, however.",
 		"[color=yellow](SGT. SALT)[/color] I must admit, this planet is strange, unlike any we've explored before. It seems to go on forever, Xlorbulon-6. But at the same time, it hardly seems to go on at all, quite like Faxon-C. Very curious.",
 		"[color=yellow](SGT. SALT)[/color] If you see Bubbles, do let me know, will you? Many thanks in advance.",
 		{"salt": "end"}
@@ -112,4 +112,25 @@ var salt_encounter_text = {
 	]
 }
 
-var all_encounter_text = {"statue": statue_encounter_text, "trumpet": trumpet_encounter_text, "salt": salt_encounter_text}
+var ghost_encounter_text = {
+	"start": [
+		"A somewhat on-the-nose interpretation of the phrase \"ghost in the machine\" rockets towards you.",
+		{}
+	]
+}
+
+var siren_encounter_text = {
+	"start": [
+		"A siren beckons with her melancholic song. She doesn't have any supernatural powers -- it's just a nice song.",
+		{}
+	]
+}
+
+var bubbles_encounter_text = {
+	"start": [
+		"Oh god why is that dog covered in blood.",
+		{}
+	]
+}
+
+var all_encounter_text = {"statue": statue_encounter_text, "trumpet": trumpet_encounter_text, "salt": salt_encounter_text, "ghost": ghost_encounter_text, "siren": siren_encounter_text, "bubblels": bubbles_encounter_text}

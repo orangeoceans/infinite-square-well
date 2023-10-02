@@ -39,8 +39,11 @@ var keypoint_vec = {
 var keypoint_fig_path = {
 	"statue": "/root/square_3D/FigureSprites/StatueSprite",
 	"trumpet": "/root/square_3D/FigureSprites/TrumpetSprite",
-	"salt": "/root/square_3D/FigureSprites/SaltSprite"
-	}
+	"salt": "/root/square_3D/FigureSprites/SaltSprite",
+	"ghost": "/root/square_3D/FigureSprites/GhostSprite",
+	"siren": "/root/square_3D/FigureSprites/SirenSprite",
+	"bubbles": "/root/square_3D/FigureSprites/BubblesSprite"
+}
 var keypoint_fig = {}
 
 var pos_tween
