@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://c0kjtb30py00w"]
+[gd_scene load_steps=51 format=3 uid="uid://c0kjtb30py00w"]
 
 [ext_resource type="Script" path="res://assets/scripts/GameplayController.gd" id="1_3kxac"]
 [ext_resource type="Script" path="res://assets/scripts/DialogueSystem.gd" id="1_ay7mc"]
@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://clnaaw6mdndg6" path="res://assets/sprites/gradient.png" id="2_p60up"]
 [ext_resource type="Script" path="res://assets/scripts/NeedleController.gd" id="3_jcith"]
 [ext_resource type="Texture2D" uid="uid://c8kite4ohj6ij" path="res://assets/sprites/w_clouds.png" id="4_4ixyg"]
-[ext_resource type="Material" path="res://assets/shaders/light_dark_mat.tres" id="4_j2xs3"]
-[ext_resource type="Script" path="res://assets/scenes/EncounterText.gd" id="4_vpesx"]
+[ext_resource type="Material" uid="uid://mijhtsyjdayj" path="res://assets/shaders/light_dark_mat.tres" id="4_j2xs3"]
+[ext_resource type="Script" path="res://assets/scripts/EncounterText.gd" id="4_ntamc"]
 [ext_resource type="Texture2D" uid="uid://do5naernrfrbc" path="res://assets/sprites/x_clouds.png" id="5_cxrtp"]
 [ext_resource type="Texture2D" uid="uid://dglfmw2ipe32v" path="res://assets/sprites/knob.png" id="5_uhtxd"]
 [ext_resource type="Texture2D" uid="uid://cc3sx832vtly3" path="res://assets/sprites/ring_x.png" id="5_ygdnb"]
@@ -20,14 +20,15 @@
 [ext_resource type="Texture2D" uid="uid://bljqvuau0fkov" path="res://assets/sprites/z_clouds.png" id="7_q6kx6"]
 [ext_resource type="Texture2D" uid="uid://c3y6ewaavw7df" path="res://assets/sprites/bg_trumpet.png" id="8_csdby"]
 [ext_resource type="Texture2D" uid="uid://bnbe6k71nf8bi" path="res://assets/sprites/grid.png" id="8_vx24x"]
-[ext_resource type="PackedScene" uid="uid://dvk5i6al8p5om" path="res://assets/scenes/BGM.tscn" id="11_h7rot"]
 [ext_resource type="Texture2D" uid="uid://c5h1ovjtr2plv" path="res://assets/sprites/dark_mode.png" id="9_4u013"]
 [ext_resource type="Texture2D" uid="uid://byp84scqf485t" path="res://assets/sprites/bg_empty.png" id="9_5j71c"]
+[ext_resource type="PackedScene" uid="uid://dvk5i6al8p5om" path="res://assets/scenes/BGM.tscn" id="11_h7rot"]
 [ext_resource type="Texture2D" uid="uid://dfv0e6rhfwrw6" path="res://assets/sprites/dialogue_box.png" id="12_n0scj"]
 [ext_resource type="Texture2D" uid="uid://c4wonewpq6xj4" path="res://assets/sprites/figure_statue.png" id="13_ugaoy"]
 [ext_resource type="Texture2D" uid="uid://mt0migfaes2r" path="res://assets/sprites/figure_trumpet.png" id="15_obr3b"]
 [ext_resource type="Texture2D" uid="uid://dgdomc6uecr7m" path="res://assets/sprites/figure_salt.png" id="17_77v8s"]
 [ext_resource type="Texture2D" uid="uid://bthia21sfxxqa" path="res://assets/sprites/A_key.png" id="19_5dkhb"]
+[ext_resource type="Script" path="res://assets/scripts/BGM.gd" id="19_7c6t8"]
 [ext_resource type="Texture2D" uid="uid://bocmovkuspf4e" path="res://assets/sprites/W_key.png" id="19_jm64m"]
 [ext_resource type="Texture2D" uid="uid://852nuuphpfcd" path="res://assets/sprites/Q_key.png" id="20_b5e6q"]
 [ext_resource type="Script" path="res://assets/scripts/IntroScreenController.gd" id="21_fl1jq"]
@@ -148,7 +149,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("4_vpesx")
+script = ExtResource("4_ntamc")
 
 [node name="SquareMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_b3738")
@@ -174,7 +175,6 @@ environment = SubResource("Environment_akhw1")
 transform = Transform3D(0.2, 0, 0, 0, 0.173205, 0.1, 0, -0.1, 0.173205, 0, 0.274379, 0.504164)
 top_level = true
 
-[node name="BGM" parent="." instance=ExtResource("11_h7rot")]
 [node name="StatueSprite" type="Sprite3D" parent="FigureSprites"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, -2.98023e-08, 0, 2.98023e-08, 0.5, 0, 0.83, -0.703)
 texture = ExtResource("13_ugaoy")
@@ -186,6 +186,9 @@ texture = ExtResource("15_obr3b")
 [node name="SaltSprite" type="Sprite3D" parent="FigureSprites"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, 1.245, -1.0545)
 texture = ExtResource("17_77v8s")
+
+[node name="BGM" parent="." instance=ExtResource("11_h7rot")]
+script = ExtResource("19_7c6t8")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
