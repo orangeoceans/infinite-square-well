@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://c0kjtb30py00w"]
+[gd_scene load_steps=58 format=3 uid="uid://c0kjtb30py00w"]
 
 [ext_resource type="Script" path="res://assets/scripts/GameplayController.gd" id="1_3kxac"]
 [ext_resource type="Script" path="res://assets/scripts/DialogueSystem.gd" id="1_ay7mc"]
@@ -47,6 +47,7 @@
 [ext_resource type="Texture2D" uid="uid://b4n6m333ogb7v" path="res://assets/sprites/E_key.png" id="26_002ms"]
 [ext_resource type="Texture2D" uid="uid://ci57v1atgy4ak" path="res://assets/sprites/F_key.png" id="28_skai7"]
 [ext_resource type="Texture2D" uid="uid://bk1nrghxej3bb" path="res://assets/sprites/R_key.png" id="29_ljks1"]
+[ext_resource type="Texture2D" uid="uid://dvcnmldk7mcwr" path="res://assets/sprites/icon.png" id="47_h08yb"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_sboss"]
 action = &"advance_dialogue"
@@ -508,9 +509,9 @@ texture = ExtResource("21_i3hi0")
 layout_mode = 1
 anchors_preset = -1
 offset_left = 204.0
-offset_top = 332.0
+offset_top = 216.0
 offset_right = 660.0
-offset_bottom = 412.0
+offset_bottom = 296.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 48
@@ -521,11 +522,36 @@ script = ExtResource("6_4177h")
 [node name="StartButton" type="Button" parent="HUD/IntroScreen"]
 layout_mode = 0
 offset_left = 355.0
-offset_top = 412.0
+offset_top = 527.0
 offset_right = 505.0
-offset_bottom = 472.0
+offset_bottom = 587.0
 theme_override_font_sizes/font_size = 24
 text = "Start"
+
+[node name="Icon" type="TextureRect" parent="HUD/IntroScreen"]
+layout_mode = 0
+offset_left = 353.0
+offset_top = 322.0
+offset_right = 860.0
+offset_bottom = 833.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("47_h08yb")
+
+[node name="Credits" type="RichTextLabel" parent="HUD/IntroScreen"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 20.0
+offset_top = 757.0
+offset_right = 241.0
+offset_bottom = 850.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "code: orangeoceans
+art: olddorothy
+music: luumi"
+script = ExtResource("6_4177h")
 
 [node name="ThemeToggle" type="CheckButton" parent="HUD"]
 z_as_relative = false
@@ -547,3 +573,4 @@ icon = ExtResource("9_4u013")
 [connection signal="toggled" from="HUD/ThemeToggle" to="HUD/DialRectY/ValueLabel" method="_on_theme_toggle_toggled"]
 [connection signal="toggled" from="HUD/ThemeToggle" to="HUD/DialRectZ/ValueLabel" method="_on_theme_toggle_toggled"]
 [connection signal="toggled" from="HUD/ThemeToggle" to="HUD/IntroScreen/TitleText" method="_on_theme_toggle_toggled"]
+[connection signal="toggled" from="HUD/ThemeToggle" to="HUD/IntroScreen/Credits" method="_on_theme_toggle_toggled"]
