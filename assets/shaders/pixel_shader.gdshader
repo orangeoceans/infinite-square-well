@@ -22,6 +22,24 @@ uniform float speak_dist = 0.75;
 const float cloud_size = 2048.;
 const float cloud_window = 256.;
 
+vec4 sample_texture_array(int index, vec2 uv) {
+    if (index == 0) {
+        return texture(key_textures[0], uv);
+    } else if (index == 1) {
+        return texture(key_textures[1], uv);
+    } else if (index == 2) {
+        return texture(key_textures[2], uv);
+    } else if (index == 3) {
+        return texture(key_textures[3], uv);
+    } else if (index == 4) {
+        return texture(key_textures[4], uv);
+    } else if (index == 5) {
+        return texture(key_textures[5], uv);
+    } else {
+        return texture(key_textures[6], uv);
+    } 
+}
+
 float point_line_distance(vec4 point, vec4 line_p, vec4 line_v) {
 	// Project point onto line, then calculate distance
 	vec4 v = point - line_p;
@@ -48,7 +66,7 @@ void fragment() {
 	for (int i = 0; i < num_keypoints; i++) {
 		float keypoint_dist = keypoint_dists[i];
 		vec3 point_line_dist = point_line_dists[i];
-		vec4 key_sample = texture(key_textures[i], UV); 
+		vec4 key_sample = sample_texture_array(i, UV); 
 
 		float r_add = clamp(key_sample[0] - point_line_dist[0], 0.0, 1.0);
 		float g_add = clamp(key_sample[1] - point_line_dist[1], 0.0, 1.0);

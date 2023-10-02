@@ -8,12 +8,12 @@ var min_volume = -80.
 var audible_dist = 7.
 
 var keypoint_streams = {
-	"statue": $calm,
+	"statue": $lofi,
 	"trumpet": $battle,
 	"salt": $chime,
 	"ghost": $beat,
 	"forest": $lofi,
-	"siren": $haven,
+	"siren": $lofi,
 	"bubbles": $chime
 }
 
