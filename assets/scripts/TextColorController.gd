@@ -1,12 +1,14 @@
 extends RichTextLabel
 
-var raw_text: String = "00000"
+var raw_text: String
 var light_color = "#4f4f4f"
 var dark_color = "#c0c0c0"
 var theme_toggle: CheckButton
 
 func _ready():
 	theme_toggle = get_node("/root/square_3D/HUD/ThemeToggle")
+	raw_text = self.text
+	update_text()
 
 func _process(_delta):
 	pass

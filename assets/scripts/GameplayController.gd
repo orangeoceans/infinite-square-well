@@ -4,14 +4,15 @@ var speed: float = 0.05
 var max_pos: float = 100.
 
 @export var pos: Vector4
+var center_pos: Vector4 = Vector4(50., 50., 50., 50.)
 var last_pos: Vector4
-var can_move: bool = true
+var can_move: bool = false
 
 var square_sprite: Sprite2D;
 var pos_label: Label3D
 
 var keypoint_pos = {
-	"jeff": Vector4(1., 1., 1., 1.)
+	"jeff": Vector4(50., 50., 50., 50.)
 }
 
 var keypoint_vec = {
@@ -26,13 +27,14 @@ var keypoint_fig_path = {"jeff": "/root/square_3D/FigureSprites/JeffSprite"}
 var keypoint_fig = {}
 
 var pos_tween
+var button_tween
 
 func _ready():
 	square_sprite = $SquareMesh/SquareViewport/SquareSprite
 	pos_label = $PositionLabel
 	# Make sure the node has a material and that it's a ShaderMaterial
 	assert(square_sprite.material is ShaderMaterial)
-	pos = Vector4(1., 1., 1., 1.)
+	pos = Vector4(center_pos)
 	last_pos = pos
 	pos_label.text = str(pos)
 	square_sprite.material.set_shader_parameter("pos", pos)
@@ -42,8 +44,7 @@ func _ready():
 	update_square()
 
 func _process(_delta):
-	can_move = not $DialogueSystem.dialogue_open
-	if can_move:
+	if can_move and not $DialogueSystem.dialogue_open:
 		if Input.is_key_pressed(KEY_Q):
 			modify_pos(0, speed)
 		elif Input.is_key_pressed(KEY_A):
@@ -114,3 +115,12 @@ func _on_theme_toggle_toggled(button_pressed):
 	else:
 		$HUD/ThemeToggle.material.set_shader_parameter("dark_mode", false)
 		$Camera3D.environment.background_color = Color("#FAFAFA")
+
+func _on_recenter_button_pressed():
+	if $DialogueSystem.dialogue_open:
+		return
+	can_move = false
+	pos_tween = get_tree().create_tween()
+	pos_tween.tween_property(self, "pos", center_pos, 0.5)
+	await get_tree().create_timer(0.5).timeout
+	can_move = true
