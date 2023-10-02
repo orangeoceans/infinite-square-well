@@ -13,11 +13,12 @@ var tutorial: bool = true
 var square_sprite: Sprite2D;
 var pos_label: Label3D
 
-var keypoints = ["statue", "trumpet"]
+var keypoints = ["statue", "trumpet", "salt"]
 
 var keypoint_pos = {
 	"statue": Vector4(50., 50., 50., 50.),
-	"trumpet": Vector4(50., 50., 73., 50.)
+	"trumpet": Vector4(50., 50., 73., 50.),
+	"salt": Vector4(50., 50., 73., 20.)
 }
 
 var keypoint_vec = {
@@ -30,12 +31,16 @@ var keypoint_vec = {
 		Vector4(0., 0., 1., 0.),
 		Vector4(0., 0., 0., 1.),
 		Vector4(1., 0., 0., 0.),
+	],
+	"salt": [
 	]
 }
 
 var keypoint_fig_path = {
 	"statue": "/root/square_3D/FigureSprites/StatueSprite",
-	"trumpet": "/root/square_3D/FigureSprites/TrumpetSprite"}
+	"trumpet": "/root/square_3D/FigureSprites/TrumpetSprite",
+	"salt": "/root/square_3D/FigureSprites/SaltSprite"
+	}
 var keypoint_fig = {}
 
 var pos_tween
@@ -47,6 +52,7 @@ func end_tutorial():
 	$HUD/DialRectY.show()
 	$HUD/DialRectZ.show()
 	$HUD/DialRectW/IndicatorRect.queue_free()
+	$HUD/DialRectW/IndicatorNeedle.queue_free()
 
 func _ready():
 	square_sprite = $SquareMesh/SquareViewport/SquareSprite
@@ -106,13 +112,16 @@ func update_square():
 	var nearest_encounter = ""
 	var nearest_encounter_dist = 9999999
 	for key in keypoints:
-		point_line_dists.append(
-			Vector3(
-				point_line_distance(pos, keypoint_pos[key], keypoint_vec[key][0]),
-				point_line_distance(pos, keypoint_pos[key], keypoint_vec[key][1]),
-				point_line_distance(pos, keypoint_pos[key], keypoint_vec[key][2]),
+		if len(keypoint_vec[key]) == 3:
+			point_line_dists.append(
+				Vector3(
+					point_line_distance(pos, keypoint_pos[key], keypoint_vec[key][0]),
+					point_line_distance(pos, keypoint_pos[key], keypoint_vec[key][1]),
+					point_line_distance(pos, keypoint_pos[key], keypoint_vec[key][2]),
+				)
 			)
-		)
+		else:
+			point_line_dists.append(Vector3(9999999,9999999,9999999))
 		var keypoint_dist = keypoint_pos[key].distance_to(pos)
 		if keypoint_dist < nearest_encounter_dist and key in $DialogueSystem.all_encounter_text:
 			nearest_encounter_dist = keypoint_dist
@@ -121,7 +130,7 @@ func update_square():
 		keypoint_fig[key].position.y = 0.83 - keypoint_dist**1.5
 	$DialogueSystem.nearest_encounter = nearest_encounter
 	$DialogueSystem.nearest_encounter_dist = nearest_encounter_dist
-	if nearest_encounter_dist <= $DialogueSystem.speak_dist:
+	if nearest_encounter_dist <= $DialogueSystem.speak_dist and len(keypoint_vec[nearest_encounter]) > 0:
 		square_sprite.material.set_shader_parameter("near_key_index", keypoints.find(nearest_encounter))
 	else:
 		square_sprite.material.set_shader_parameter("near_key_index", -1)

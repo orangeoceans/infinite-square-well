@@ -19,11 +19,11 @@ var statue_encounter_text = {
 		"[color=yellow](CROW)[/color] Yes, these four fields are permeated with vibrations, which through their mutual interference, gives rise to the great infinity of phenomena in the SQUARE's substrate. Of these, thankfully, most are GOOD VIBRATIONS.", 
 		"[color=yellow](CROW)[/color] You can explore the SQUARE's phenomena by tuning into these vibrations, but, ah, it seems you are missing a few dials. Here, I have some extras to spare.\n\n[color=pink](Obtained new dials!)[/color]", 
 		"Press [color=green]Q/A[/color], [color=green]W/S[/color], [color=green]E/D[/color], and [color=green]R/F[/color] to control your four dials.",
-		"[color=yellow](CROW)[/color] Luckily, friend, you are not the first to fall into the SQUARE. If you dial [color=aqua]E-wards[/color] from here, you will find a town. In its shadow you may find your way to some others like yourself. If you see anything strange, I'd be happy to impart any information I have. [wave]Good luck![/wave]", 
+		"[color=yellow](CROW)[/color] Luckily, friend, you are not the first to fall into the SQUARE. If you dial [color=aqua]due E-wards[/color] from here, you will find a town. In its shadow you may find your way to some others like yourself. If you see anything strange, I'd be happy to impart any information I have. [wave]Good luck![/wave]", 
 		{"statue": "end"}],
 	"end": ["[color=yellow](CROW)[/color] CAW! CAW! CAW! CAW! CAW!", 
 		"[color=yellow](CROW)[/color] Ahem, apologies. I must keep up appearances, you understand.",
-		"[color=yellow](CROW)[/color] Remember: if you dial [color=aqua]E-wards[/color] from here, you will find a town. In its shadow you may find your way to some others like yourself.",
+		"[color=yellow](CROW)[/color] Remember: if you dial [color=aqua]due E-wards[/color] from here, you will find a town. In its shadow you may find your way to some others like yourself.",
 		"[color=yellow](STATUE)[/color] ...", {}],
 	"trumpet": [
 		"[color=yellow](CROW)[/color] CAW! A trumpet-creature? Yes, they are quite common here, actually, some of the SQUARE's more industrious inhabitants.",
@@ -51,7 +51,8 @@ var trumpet_encounter_text = {
 		"You buy a banana.",
 		"[color=yellow](OL' VINNY)[/color] That's real gracious of you. Sorry about the sob story -- name's Vinny, by the way, short for Vindpipe. Vindpipe Reed.",
 		"...",
-		"[color=yellow](VINDPIPE \"VINNY\" REED)[/color] Am I from the outside world? Outside of where?",
+		"You decide to ask if Vinny's from outside the SQUARE.",
+		"[color=yellow](VINDPIPE \"VINNY\" REED)[/color] What? Am I from outside the square? What square?",
 		"...",
 		"[color=yellow](VINDPIPE \"VINNY\" REED)[/color] Listen, you're sounding a little bananas and I've known a few bananas in my life so I know what I'm talking about.",
 		"[color=yellow](VINDPIPE \"VINNY\" REED)[/color] But if you want to find someone, the city's the best bet, it's a real jungle in here. We here this is the heart of the city, and it goes out [color=aqua]ED-ways[/color], [color=aqua]RF-ways[/color], and [color=aqua]QA-ways[/color].",
@@ -68,4 +69,28 @@ var trumpet_encounter_text = {
 	]
 }
 
-var all_encounter_text = {"statue": statue_encounter_text, "trumpet": trumpet_encounter_text}
+var salt_encounter_text = {
+	"start": [
+		"A rather tall space dog floats towards you in distress.",
+		"[color=yellow](ASTROHOUND)[/color] -sniff sniff- Who goes there?",
+		"You wonder if her spacesuit isn't airtight. She salutes you. You salute back.",
+		"[color=yellow](ASTROHOUND)[/color] Ah, a fellow explorer. I am Sargeant Salt, but you can call me Sgt. Salt. Are you searching for someone, too?",
+		"[color=yellow](SGT. SALT)[/color] Why yes, I am from outside this world. I lost my partner Bubbles when we arrived here, in fact. I fear he cannot be left alone for too long.",
+		"[color=yellow](SGT. SALT)[/color] His... let's say... [i]ruff[/i] nature can be effective in our missions, but when unsupervised, he...",
+		"[color=yellow](SGT. SALT)[/color] Ahem. Never mind that.",
+		"[color=yellow](SGT. SALT)[/color] I got separated from Bubbles somewhere over the forest, I believe. It's a bit of a journey to get there. [color=aqua]First, you want to shift due S-ward from here, until you just start to see purple. Then, turn A-ward, and you should get to the forest's shadow eventually. From there, you can get to the heart of the forest by following the shadow F-ward.[/color] I am not sure where in the forest my colleague might be, however.",
+		"[color=yellow](SGT. SALT)[/color] I must admit, this planet is strange, unlike any we've explored before. It seems to go on forever, Xlorbulon-6. But at the same time, it hardly seems to go on at all, quite like Faxon-C. Very curious.",
+		"[color=yellow](SGT. SALT)[/color] If you see Bubbles, do let me know, will you? Many thanks in advance.",
+		{"salt": "end"}
+	],
+	"end": [
+		"Sargeant \"Sgt. Salt\" Salt floats on by.",
+		"[color=yellow](SGT. SALT)[/color] -sniff sniff- Who goes there?",
+		"[color=yellow](SGT. SALT)[/color] Ah, it's good to smell you again. Have you visited the forest yet?",
+		"[color=yellow](SGT. SALT)[/color] [color=aqua]First, you want to shift due S-ward from here, until you just start to see purple. Then, turn A-ward, and you should get to the forest's shadow eventually. From there, you can get to the heart of the forest by following the shadow F-ward.[/color]",
+		"[color=yellow](SGT. SALT)[/color] If you see Bubbles there, do let me know, will you? Many thanks in advance.",
+		{}
+	]
+}
+
+var all_encounter_text = {"statue": statue_encounter_text, "trumpet": trumpet_encounter_text, "salt": salt_encounter_text}

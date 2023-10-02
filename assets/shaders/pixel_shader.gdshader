@@ -67,7 +67,7 @@ void fragment() {
 
 	// COLOR = clouds_rgb;
 	COLOR = vec4(
-		r + clamp(clouds_rgb[0]*(0.6*nearest_dist[0] + 0.2*nearest_dist[1] + 0.2*nearest_dist[2]), 0.0, 1.0), 
-		g + clamp(clouds_rgb[1]*(0.2*nearest_dist[0] + 0.6*nearest_dist[1] + 0.2*nearest_dist[2]), 0.0, 1.0), 
-		b + clamp(clouds_rgb[2]*(0.2*nearest_dist[0] + 0.2*nearest_dist[1] + 0.6*nearest_dist[2]), 0.0, 1.0), 1.0);
+		r + clamp(clouds_rgb[0]*(0.5*nearest_dist[0] + 0.25*nearest_dist[1] + 0.25*nearest_dist[2]), 0.0, 1.0), 
+		g + clamp(clouds_rgb[1]*(0.25*nearest_dist[0] + 0.5*nearest_dist[1] + 0.25*nearest_dist[2]), 0.0, 1.0), 
+		b + clamp(clouds_rgb[2]*(0.25*nearest_dist[0] + 0.25*nearest_dist[1] + 0.5*nearest_dist[2]), 0.0, 1.0), 1.0);
 }

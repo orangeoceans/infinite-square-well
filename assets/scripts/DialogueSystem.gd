@@ -5,10 +5,7 @@ extends CanvasLayer
 
 var can_talk = false
 var all_encounter_text
-var encounter_flags = {
-	"statue": "start",
-	"trumpet": "start"
-}
+var encounter_flags
 var dialogue_index = 0
 var dialogue_open = false
 var char_per_sec = 40.
@@ -108,6 +105,10 @@ func _ready():
 	nearest_encounter = ""
 	camera = get_node("/root/square_3D/Camera3D")
 	all_encounter_text = $EncounterText.all_encounter_text
+	encounter_flags = {}
+	for key in all_encounter_text:
+		encounter_flags[key] = "start"
+	print(encounter_flags)
 
 func _process(_delta):
 	var dialogue_to_enable = (nearest_encounter_dist <= speak_dist)
