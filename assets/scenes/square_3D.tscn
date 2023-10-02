@@ -69,9 +69,12 @@ material = SubResource("StandardMaterial3D_6hw7o")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_la70n"]
 shader = ExtResource("1_btqfs")
 shader_parameter/pos = Vector4(0, 0, 0, 0)
+shader_parameter/keypoint_dists = null
 shader_parameter/point_line_dists = null
 shader_parameter/max_pos = 100.0
 shader_parameter/near_key_index = -1
+shader_parameter/near_key_dist = 0.0
+shader_parameter/speak_dist = 0.75
 shader_parameter/w_clouds = ExtResource("4_4ixyg")
 shader_parameter/x_clouds = ExtResource("5_cxrtp")
 shader_parameter/y_clouds = ExtResource("6_m10lw")
@@ -182,27 +185,33 @@ transform = Transform3D(0.2, 0, 0, 0, 0.173205, 0.1, 0, -0.1, 0.173205, 0, 0.274
 top_level = true
 
 [node name="StatueSprite" type="Sprite3D" parent="FigureSprites"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, -2.98023e-08, 0, 2.98023e-08, 0.5, 0, 0.83, -0.703)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, -2.98023e-08, 0, 2.98023e-08, 0.5, 0, -10.83, -0.703)
+modulate = Color(1, 1, 1, 0)
 texture = ExtResource("13_ugaoy")
 
 [node name="TrumpetSprite" type="Sprite3D" parent="FigureSprites"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, -2.98023e-08, 0, 2.98023e-08, 0.5, 0, 0.83, -0.703)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, -2.98023e-08, 0, 2.98023e-08, 0.5, 0, -10.83, -0.703)
+modulate = Color(1, 1, 1, 0)
 texture = ExtResource("15_obr3b")
 
 [node name="SaltSprite" type="Sprite3D" parent="FigureSprites"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, 1.245, -1.0545)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, -10.83, -1.0545)
+modulate = Color(1, 1, 1, 0)
 texture = ExtResource("17_77v8s")
 
 [node name="GhostSprite" type="Sprite3D" parent="FigureSprites"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, 1.245, -1.0545)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, -10.83, -1.0545)
+modulate = Color(1, 1, 1, 0)
 texture = ExtResource("18_oxncn")
 
 [node name="SirenSprite" type="Sprite3D" parent="FigureSprites"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, 1.245, -1.0545)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, -10.83, -1.0545)
+modulate = Color(1, 1, 1, 0)
 texture = ExtResource("19_hrio7")
 
 [node name="BubblesSprite" type="Sprite3D" parent="FigureSprites"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, 1.245, -1.0545)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, -10.83, -1.0545)
+modulate = Color(1, 1, 1, 0)
 texture = ExtResource("20_58rqc")
 
 [node name="BGM" parent="." instance=ExtResource("11_h7rot")]

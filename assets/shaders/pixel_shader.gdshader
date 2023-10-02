@@ -8,13 +8,16 @@ uniform sampler2D y_clouds;
 uniform sampler2D z_clouds;
 uniform sampler2D cloud_gradient;
 
-const int num_keypoints = 3;
+const int num_keypoints = 7;
 uniform sampler2D[num_keypoints] key_textures;
+uniform float[num_keypoints] keypoint_dists;
 uniform vec3[num_keypoints] point_line_dists;
 
-uniform float max_pos = 100;
+uniform float max_pos = 100.;
 
 uniform int near_key_index = -1;
+uniform float near_key_dist = 0.;
+uniform float speak_dist = 0.75;
 
 const float cloud_size = 2048.;
 const float cloud_window = 256.;
@@ -43,13 +46,25 @@ void fragment() {
 	float r = 0., g = 0., b = 0.;
 	vec3 nearest_dist = vec3(99999., 99999., 99999.);
 	for (int i = 0; i < num_keypoints; i++) {
+		float keypoint_dist = keypoint_dists[i];
 		vec3 point_line_dist = point_line_dists[i];
 		vec4 key_sample = texture(key_textures[i], UV); 
-		if (!(near_key_index >= 0) || i == near_key_index) {
-			r += clamp(key_sample[0] - point_line_dist[0], 0.0, 1.0);
-			g += clamp(key_sample[1] - point_line_dist[1], 0.0, 1.0);
-			b += clamp(key_sample[2] - point_line_dist[2], 0.0, 1.0);
+
+		float r_add = clamp(key_sample[0] - point_line_dist[0], 0.0, 1.0);
+		float g_add = clamp(key_sample[1] - point_line_dist[1], 0.0, 1.0);
+		float b_add = clamp(key_sample[2] - point_line_dist[2], 0.0, 1.0);
+		r_add *= (1.-2.*keypoint_dist/max_pos);
+		g_add *= (1.-2.*keypoint_dist/max_pos);
+		b_add *= (1.-2.*keypoint_dist/max_pos);
+		if (near_key_index >= 0 && i != near_key_index) {
+			r_add *= clamp(near_key_dist, 0., 1.);
+			g_add *= clamp(near_key_dist, 0., 1.);
+			b_add *= clamp(near_key_dist, 0., 1.);
 		}
+		r += r_add;
+		g += g_add;
+		b += b_add;
+
 		if (point_line_dist[0] < nearest_dist[0])
 			nearest_dist[0] = point_line_dist[0];
 		if (point_line_dist[1] < nearest_dist[1])

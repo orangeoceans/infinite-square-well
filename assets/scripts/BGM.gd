@@ -8,9 +8,13 @@ var min_volume = -80.
 var audible_dist = 7.
 
 var keypoint_streams = {
-	"statue": $lofi,
-	"trumpet": $trumpet,
-	"salt": $chime
+	"statue": $calm,
+	"trumpet": $battle,
+	"salt": $chime,
+	"ghost": $beat,
+	"forest": $lofi,
+	"siren": $haven,
+	"bubbles": $chime
 }
 
 func linear_to_log(linear):
@@ -49,5 +53,4 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	update_audio()
-	print(master_volume)
-	print($ambience.volume_db)
+

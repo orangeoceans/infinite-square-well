@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvk5i6al8p5om"]
+[gd_scene load_steps=8 format=3 uid="uid://dvk5i6al8p5om"]
 
 [ext_resource type="AudioStream" uid="uid://dcq052gmfpj1q" path="res://assets/music/bgmloop.wav" id="1_j74om"]
 [ext_resource type="AudioStream" uid="uid://blbv2s7lbykgf" path="res://assets/music/lofiloop.wav" id="2_44fpx"]
 [ext_resource type="AudioStream" uid="uid://bxdn8qtawjo6m" path="res://assets/music/beatloop.wav" id="3_y5d5p"]
 [ext_resource type="AudioStream" uid="uid://bamawg1w65rnl" path="res://assets/music/chimeloop.wav" id="4_s3v6o"]
+[ext_resource type="AudioStream" uid="uid://dc1gf3aaiopgj" path="res://assets/music/exploration_calm_looped.wav" id="5_2u45n"]
+[ext_resource type="AudioStream" uid="uid://bsvdxhqajl0d7" path="res://assets/music/battle_layer.wav" id="6_qcsnc"]
+[ext_resource type="AudioStream" uid="uid://bhf5hr6imhjfd" path="res://assets/music/the_haven.wav" id="7_8x0wh"]
 
 [node name="BGM" type="Node2D"]
 
@@ -14,8 +17,17 @@ volume_db = -80.0
 [node name="lofi" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_44fpx")
 
-[node name="trumpet" type="AudioStreamPlayer2D" parent="."]
+[node name="beat" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_y5d5p")
 
 [node name="chime" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_s3v6o")
+
+[node name="calm" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_2u45n")
+
+[node name="battle" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_qcsnc")
+
+[node name="haven" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_8x0wh")

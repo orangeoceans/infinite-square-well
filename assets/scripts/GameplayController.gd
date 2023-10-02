@@ -13,12 +13,18 @@ var tutorial: bool = true
 var square_sprite: Sprite2D;
 var pos_label: Label3D
 
-var keypoints = ["statue", "trumpet", "salt"]
+var point_line_dist_factor = 0.3 # Smaller values makes it easier to see lines
+
+var keypoints = ["statue", "trumpet", "salt", "ghost", "forest", "siren", "bubbles"]
 
 var keypoint_pos = {
 	"statue": Vector4(50., 50., 50., 50.),
 	"trumpet": Vector4(50., 50., 73., 50.),
-	"salt": Vector4(50., 50., 73., 25.)
+	"salt": Vector4(50., 50., 73., 25.),
+	"ghost": Vector4(70., 50., 73., 50.),
+	"forest": Vector4(30., 22., 73., 55.),
+	"siren": Vector4(60., 22., 60., 55.),
+	"bubbles": Vector4(18., 10., 73., 55.)
 }
 
 var keypoint_vec = {
@@ -32,8 +38,19 @@ var keypoint_vec = {
 		Vector4(0., 0., 0., 1.),
 		Vector4(1., 0., 0., 0.),
 	],
-	"salt": [
-	]
+	"salt": [],
+	"ghost": [],
+	"forest": [
+		Vector4(1., 1., 0., 0.).normalized(),
+		Vector4(0., 0., 0., 1.),
+		Vector4(0, 0., 1., 0.),
+	],
+	"siren": [
+		Vector4(1., 0., -1., 0.).normalized(),
+		Vector4(0., 0., 1., 1.),
+		Vector4(1, 0., 0., 0.),
+	],
+	"bubbles": []
 }
 
 var keypoint_fig_path = {
@@ -41,6 +58,7 @@ var keypoint_fig_path = {
 	"trumpet": "/root/square_3D/FigureSprites/TrumpetSprite",
 	"salt": "/root/square_3D/FigureSprites/SaltSprite",
 	"ghost": "/root/square_3D/FigureSprites/GhostSprite",
+	"forest": "",
 	"siren": "/root/square_3D/FigureSprites/SirenSprite",
 	"bubbles": "/root/square_3D/FigureSprites/BubblesSprite"
 }
@@ -68,7 +86,7 @@ func _ready():
 	square_sprite.material.set_shader_parameter("pos", pos)
 	square_sprite.material.set_shader_parameter("max_pos", max_pos)
 	for key in keypoint_fig_path:
-		keypoint_fig[key] = get_node(keypoint_fig_path[key])
+		keypoint_fig[key] = get_node(keypoint_fig_path[key]) if keypoint_fig_path[key] else null
 	update_square()
 
 func _process(_delta):
@@ -105,13 +123,14 @@ func point_line_distance(point: Vector4, line_p: Vector4, line_v: Vector4) -> fl
 	# Project point onto line, then calculate distance
 	var v: Vector4 = point - line_p
 	var closest_p: Vector4 = line_p + line_v * v.dot(line_v)
-	return clamp(closest_p.distance_to(point), 0.0, 1.0)
+	return clamp(closest_p.distance_to(point)*point_line_dist_factor, 0.0, 1.0)
 
 func modify_pos(index: int, amount: float):
 	pos[index] = clamp(pos[index] + amount, 0.0, max_pos)
 	
 func update_square():
 	var point_line_dists = []
+	var keypoint_dists = []
 	var nearest_encounter = ""
 	var nearest_encounter_dist = 9999999
 	for key in keypoints:
@@ -126,17 +145,22 @@ func update_square():
 		else:
 			point_line_dists.append(Vector3(9999999,9999999,9999999))
 		var keypoint_dist = keypoint_pos[key].distance_to(pos)
+		keypoint_dists.append(keypoint_dist)
 		if keypoint_dist < nearest_encounter_dist and key in $DialogueSystem.all_encounter_text:
 			nearest_encounter_dist = keypoint_dist
 			nearest_encounter = key
-		keypoint_fig[key].modulate.a = clamp(1. - keypoint_dist**2, 0., 1.)
-		keypoint_fig[key].position.y = 0.83 - keypoint_dist**1.5
+	if nearest_encounter in keypoint_fig and keypoint_fig[nearest_encounter]:
+		keypoint_fig[nearest_encounter].modulate.a = clamp(1. - nearest_encounter_dist**2, 0., 1.)
+		keypoint_fig[nearest_encounter].position.y = 0.83 - nearest_encounter_dist**1.5
 	$DialogueSystem.nearest_encounter = nearest_encounter
 	$DialogueSystem.nearest_encounter_dist = nearest_encounter_dist
 	if nearest_encounter_dist <= $DialogueSystem.speak_dist and len(keypoint_vec[nearest_encounter]) > 0:
 		square_sprite.material.set_shader_parameter("near_key_index", keypoints.find(nearest_encounter))
+		square_sprite.material.set_shader_parameter("near_key_dist", nearest_encounter_dist)
 	else:
 		square_sprite.material.set_shader_parameter("near_key_index", -1)
+		square_sprite.material.set_shader_parameter("near_key_dist", 99999.)
+	square_sprite.material.set_shader_parameter("keypoint_dists", keypoint_dists)
 	square_sprite.material.set_shader_parameter("point_line_dists", point_line_dists)
 	square_sprite.material.set_shader_parameter("pos", pos)
 	pos_label.text = "%.2f %.2f %.2f %.2f" % [pos[0], pos[1], pos[2], pos[3]]

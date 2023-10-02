@@ -85,6 +85,19 @@ var trumpet_encounter_text = {
 		"It's Vinny.",
 		"[color=yellow](VINDPIPE \"VINNY\" REED)[/color] Leave me alone, kid. I'm ruined.",
 		{}
+	],
+	"siren": [
+		"It's Vinny.",
+		"[color=yellow](VINDPIPE \"VINNY\" REED)[/color] Leave me alone, kid. I'm ruined.",
+		"[color=yellow](VINDPIPE \"VINNY\" REED)[/color] What, a siren? Out by the lake? [shake]Wants bananas by the boxload!?[/shake]",
+		"[color=yellow](VINDPIPE \"VINNY\" REED)[/color] [shake]HOOOOOOOOOOOOOONK[/shake] Ol' Vinny's big break is finally here! No sawdust for dinner tonight!",
+		"[color=yellow](VINDPIPE \"VINNY\" REED)[/color] Thanks kid, have a banana on the house! I gotta pack! [shake]HOOOOOOOOOOOOOONK[/shake]",
+		{"trumpet": "true_end", "siren": "trumpet"}
+	],
+	"true_end": [
+		"It's Vinny.",
+		"[color=yellow](VINDPIPE \"VINNY\" REED)[/color] Sorry kid, can't talk! I gotta pack! [shake]HOOOOOOOOOOOOOONK[/shake]",
+		{}
 	]
 }
 
@@ -100,7 +113,34 @@ var salt_encounter_text = {
 		"[color=yellow](SGT. SALT)[/color] I got separated from Bubbles somewhere over the forest, I believe. It's a bit of a journey to get there. [color=aqua]First, you want to shift S-ward from here, until you just start to see purple. Then, turn A-ward, and you should get to the forest's shadow in due time. From there, you can get to the heart of the forest by following the shadow R-ward.[/color] I am not sure where in the forest my colleague might be, however.",
 		"[color=yellow](SGT. SALT)[/color] I must admit, this planet is strange, unlike any we've explored before. It seems to go on forever, Xlorbulon-6. But at the same time, it hardly seems to go on at all, quite like Faxon-C. Very curious.",
 		"[color=yellow](SGT. SALT)[/color] If you see Bubbles, do let me know, will you? Many thanks in advance.",
-		{"salt": "end"}
+		{"salt": "end", "bubbles": "start_salt"}
+	],
+	"start_bubbles": [
+		"A rather tall space dog floats towards you in distress.",
+		"[color=yellow](ASTROHOUND)[/color] -sniff sniff- Who goes there?",
+		"You wonder if her spacesuit isn't airtight. She salutes you. You salute back.",
+		"[color=yellow](ASTROHOUND)[/color] Ah, a fellow explorer. I am Sargeant Salt, but you can call me Sgt. Salt. Are you searching for someone, too?",
+		"[color=yellow](SGT. SALT)[/color] Why yes, I am from outside this world. I lost my partner Bubbles when we arrived here, in fact. I fear he cannot be left alone for too long.",
+		"[color=yellow](SGT. SALT)[/color] His... let's say... [i]ruff[/i] nature can be effective in our missions, but when unsupervised, he...",
+		"[color=yellow](SGT. SALT)[/color] Ahem. Never mind that.",
+		"[color=yellow](SGT. SALT)[/color] I got separated from Bubbles somewhere over the forest, I believe. It's a bit of a journey to get there. [color=aqua]First, you want to shift S-ward from here, until you just start to see purple. Then, turn A-ward, and you should get to the forest's shadow in due time. From there, you can get to the heart of the forest by following the shadow R-ward.[/color] I am not sure where in the forest my colleague might be, however.",
+		"[color=yellow](SGT. SALT)[/color] I must admit, this planet is strange, unlike any we've explored before. It seems to go on forever, Xlorbulon-6. But at the same time, it hardly seems to go on at all, quite like Faxon-C. Very curious.",
+		"[color=yellow](SGT. SALT)[/color] If you see Bubbles, do let me know, will you? Many thanks in advance.",
+		"...",
+		"[color=yellow](SGT. SALT)[/color] Ah, so you think you've seen him, floating about at around (18, 10, 73, 55), is it? Many thanks, I shall -- ah, covered in blood? Yes, that is... to be expected of him.",
+		"...",
+		"[color=yellow](SGT. SALT)[/color] Less and less, you say? He would like to be left alone? I must say, this news is disheartening. This world plays strange tricks on one's perception of oneself. I may pay him a visit, nonetheless. Thank you, once again.",
+		{"salt": "true_end"}
+	],
+	"bubbles": [
+		"Sargeant \"Sgt. Salt\" Salt floats on by.",
+		"[color=yellow](SGT. SALT)[/color] -sniff sniff- Who goes there?",
+		"[color=yellow](SGT. SALT)[/color] Ah, it's good to smell you again. Have you visited the forest yet?",
+		"...",
+		"[color=yellow](SGT. SALT)[/color] So you think you've seen him, floating about at around (18, 10, 73, 55), is it? Many thanks, I shall -- ah, covered in blood? Yes, that is... to be expected of him.",
+		"...",
+		"[color=yellow](SGT. SALT)[/color] Less and less, you say? He would like to be left alone? I must say, this news is disheartening. This world plays strange tricks on one's perception of oneself. I may pay him a visit, nonetheless. Thank you, once again.",
+		{"salt": "true_end"}
 	],
 	"end": [
 		"Sargeant \"Sgt. Salt\" Salt floats on by.",
@@ -109,12 +149,38 @@ var salt_encounter_text = {
 		"[color=yellow](SGT. SALT)[/color] [color=aqua]First, you want to shift due S-ward from here, until you just start to see purple. Then, turn A-ward, and you should get to the forest's shadow eventually. From there, you can get to the heart of the forest by following the shadow F-ward.[/color]",
 		"[color=yellow](SGT. SALT)[/color] If you see Bubbles there, do let me know, will you? Many thanks in advance.",
 		{}
+	],
+	"true_end": [
+		"Sargeant \"Sgt. Salt\" Salt floats on by.",
+		"[color=yellow](SGT. SALT)[/color] -sniff sniff- Who goes there?",
+		"[color=yellow](SGT. SALT)[/color] Ah, it's good to smell you again.",
+		"[color=yellow](SGT. SALT)[/color] I must say, the news you gave me is disheartening. This world plays strange tricks on one's perception of oneself. I may pay him a visit, nonetheless. Thank you, once again.",
+		{}
 	]
 }
 
 var ghost_encounter_text = {
 	"start": [
 		"A somewhat on-the-nose interpretation of the phrase \"ghost in the machine\" rockets towards you.",
+		"[color=yellow](GHOST)[/color] Stand back! You imbecilic inchworm! One step closer and my Automatic Solar Flare Laser Piston Defense Mechanisms could have been triggered. You'd be reduced to ash and dust befoere you could even say [wave]Jumping Jackarandas![/wave]",
+		"[color=yellow](GHOST)[/color] Yes, it is I, WELTGEIST, the unstoppable locomotive! Now if you've no further business, leave so that your malefic mouth-breathing does not rust the perfectly polished exterior of my stunningly scintillating suit.",
+		"...",
+		"[color=yellow](WELTGEIST)[/color] What are you doing, still standing there like a foppish frengle ostentatiously ogling a titillating treat? Are you curious about my mech suit?",
+		"[color=yellow](WELTGEIST)[/color] Hmph! Unlike my ectoplasmic equals I have devised a way to walk and thrive amongst the living - not just amongst, but above! My cleverly crafted contraption can effortlessly evade the perils of any biome, defend against any antagonistic attack and produce the most savory of sandwiches in .092839385 seconds.",
+		"[color=yellow](WELTGEIST)[/color] If you must know, the stroke of genius that led me to construct my proud body came as I was wandering the SQUARE one day, sinfully nude, frighteningly unprotected from the elements, when I happened upon a copy of TRANSFORMERS: AGE OF EXTINCTION. What sublime art! And what luck! A veritable deus ex machina, if you will.",
+		"[color=yellow](WELTGEIST)[/color] Impressed? Don't bother. I already know. Now, begone! I have no patience for disgustingly organic beings such as you.",
+		{"ghost": "end"}
+	],
+	"end": [
+		"[color=yellow](WELTGEIST)[/color]Here to grovel before my world-historic body? Very well. You may look, but not touch.",
+		{}
+	]
+}
+
+var forest_encounter_text = {
+	"start": [
+		"A shallow river runs through this autumnal forest. The air reeks of dead salmon; gulls and raccoons swoop in for a feast.",
+		"The forest's shadow stretches out in three directions. Which path will you take?",
 		{}
 	]
 }
@@ -122,6 +188,29 @@ var ghost_encounter_text = {
 var siren_encounter_text = {
 	"start": [
 		"A siren beckons with her melancholic song. She doesn't have any supernatural powers -- it's just a nice song.",
+		"[color=yellow](SIREN)[/color] [wave]This lake is filled with sooo many things, if you just know where to look! Though, it could use a bit more water...[/wave]",
+		"[color=yellow](SIREN)[/color] [wave]Oh, hi! Are you a collector, too? Or are you something to be collected? Tee hee![/wave]",
+		"[color=yellow](SIREN)[/color] [wave]Don't worry, I don't think I could make anything useful out of you... yet. Maybe come back after you've decomposed a bit, and then we can talk? ;)[/wave]",
+		"[color=yellow](SIREN)[/color] [wave]I make all of my accessories out of treasures I find lying around. Like this hair piece made out of old netting and soda bottles! Isn't is stylish? The dead crab really adds a nice pop of color.[/wave]",
+		"[color=yellow](SIREN)[/color] [wave]There is a type of treasure I need more of, though. Banana peels! They're so hard to come by around here. It's too cold, I think. Oh, if only I could get a whole box of banana peels, I would give any amount of treasure in exchange.[/wave]",
+		"[color=yellow](SIREN)[/color] [wave]By the way, I saw some weird thing in a space suit floating around, [color=aqua]A-S-ways of the heart of the forest[/color]. Whatever it was, I don't think it can be good for the environment! Do you think I could make something out of it?",
+		{"siren": "end", "trumpet": "siren"}
+	], 
+	"end": [
+		"The siren beckons with her melancholic song.",
+		"[color=yellow](SIREN)[/color] [wave]Hello again! You wouldn't happen to know where I could get some banana peels, would you?[/wave]",
+		"[color=yellow](SIREN)[/color] [wave]By the way, I saw some weird thing in a space suit floating around, [color=aqua]A-S-ways of the heart of the forest[/color]. Whatever it was, I don't think it can be good for the environment! Do you think I could make something out of it?",
+		{}
+	], 
+	"trumpet": [
+		"The siren beckons with her melancholic song.",
+		"[color=yellow](SIREN)[/color] [wave]A trumpet-creature is selling bananas in the city? Wow, I mean, I've never been, and I've always been afraid of crowds...[/wave]",
+		"[color=yellow](SIREN)[/color] [wave]Oh, but if it's for some beautiful banana peels, I can do it![/wave]",
+		"[color=yellow](SIREN)[/color] [wave]Thank you thank you! I must pack![/wave]",
+		{"siren": "true_end"}
+	],
+	"true_end": [
+		"The siren is too busy packing to talk.",
 		{}
 	]
 }
@@ -129,8 +218,42 @@ var siren_encounter_text = {
 var bubbles_encounter_text = {
 	"start": [
 		"Oh god why is that dog covered in blood.",
+		"[color=yellow](BLOODY DOG)[/color] Oh, hello there. Are you one, or two?",
+		"[color=yellow](BLOODY DOG)[/color] I used to be two. Where the other is, I don't know. This place is so small, but she's been gone so long...",
+		"[color=yellow](BLOODY DOG)[/color] I think, when we come here, we become less.\n\n...Or do we become more? It's hard to say.",
+		"[color=yellow](BLOODY DOG)[/color] But well, there's no point. It will only shrink. Less and less... You should go before you are less, too.",
+		{"bubbles": "end", "salt": "start_bubbles"}
+	],
+	"end": [
+		"Oh god why is that dog covered in blood.",
+		"[color=yellow](BLOODY DOG)[/color] Oh, hello again.",
+		"[color=yellow](BLOODY DOG)[/color] I think, when we come here, we become less.\n\n...Or do we become more? It's hard to say.",
+		"[color=yellow](BLOODY DOG)[/color] But well, there's no point. It will only shrink. Less and less... You should go before you are less, too.",
+		{}
+	],
+	"start_salt": [
+		"Oh god why is that dog covered in blood.",
+		"[color=yellow](BUBBLES?)[/color] Oh, hello there. Are you one, or two?",
+		"[color=yellow](BUBBLES?)[/color] I used to be two. Where the other is, I don't know. This place is so small, but she's been gone so long...",
+		"[color=yellow](BUBBLES?)[/color] Oh, so you've seen her, my Sgt. Salt?",
+		"[color=yellow](BUBBLES?)[/color] Well, I don't know if I want to be two anymore. I think, when we come here, we become less.\n\n...Or do we become more? It's hard to say.",
+		"[color=yellow](BUBBLES?)[/color] But well, there's no point. It will only shrink. Less and less... I am already less. You should go before you are less, too.",
+		"[color=yellow](BUBBLES?)[/color] Tell Salt I said hi.",
+		{"bubbles": "true_end", "salt": "bubbles"}
+	],
+	"salt": [
+		"Oh god why is that dog covered in blood.",
+		"[color=yellow](BUBBLES?)[/color] Oh, hello again.",
+		"[color=yellow](BUBBLES?)[/color] Oh, so you've seen her, my Sgt. Salt?",
+		"[color=yellow](BUBBLES?)[/color] Well, I don't know if I want to be two anymore. I think, when we come here, we become less.\n\n...Or do we become more? It's hard to say.",
+		"[color=yellow](BUBBLES?)[/color] But well, there's no point. It will only shrink. Less and less... I am already less. You should go before you are less, too.",
+		"[color=yellow](BUBBLES?)[/color] Tell Salt I said hi.",
+		{"bubbles": "true_end"}
+	],
+	"true_end": [
+		"[color=yellow](BUBBLES?)[/color] Tell Salt I said hi.",
 		{}
 	]
 }
 
-var all_encounter_text = {"statue": statue_encounter_text, "trumpet": trumpet_encounter_text, "salt": salt_encounter_text, "ghost": ghost_encounter_text, "siren": siren_encounter_text, "bubblels": bubbles_encounter_text}
+var all_encounter_text = {"statue": statue_encounter_text, "trumpet": trumpet_encounter_text, "salt": salt_encounter_text, "ghost": ghost_encounter_text, "forest": forest_encounter_text,"siren": siren_encounter_text, "bubbles": bubbles_encounter_text}
