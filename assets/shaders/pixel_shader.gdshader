@@ -8,11 +8,13 @@ uniform sampler2D y_clouds;
 uniform sampler2D z_clouds;
 uniform sampler2D cloud_gradient;
 
-const int num_keypoints = 1;
+const int num_keypoints = 2;
 uniform sampler2D[num_keypoints] key_textures;
 uniform vec3[num_keypoints] point_line_dists;
 
 uniform float max_pos = 100;
+
+uniform int near_key_index = -1;
 
 const float cloud_size = 2048.;
 const float cloud_window = 256.;
@@ -43,9 +45,11 @@ void fragment() {
 	for (int i = 0; i < num_keypoints; i++) {
 		vec3 point_line_dist = point_line_dists[i];
 		vec4 key_sample = texture(key_textures[i], UV); 
-		r += clamp(key_sample[0] - point_line_dist[0], 0.0, 1.0);
-		g += clamp(key_sample[1] - point_line_dist[1], 0.0, 1.0);
-		b += clamp(key_sample[2] - point_line_dist[2], 0.0, 1.0);
+		if (!(near_key_index >= 0) || i == near_key_index) {
+			r += clamp(key_sample[0] - point_line_dist[0], 0.0, 1.0);
+			g += clamp(key_sample[1] - point_line_dist[1], 0.0, 1.0);
+			b += clamp(key_sample[2] - point_line_dist[2], 0.0, 1.0);
+		}
 		if (point_line_dist[0] < nearest_dist[0])
 			nearest_dist[0] = point_line_dist[0];
 		if (point_line_dist[1] < nearest_dist[1])
@@ -63,7 +67,7 @@ void fragment() {
 
 	// COLOR = clouds_rgb;
 	COLOR = vec4(
-		r + clamp(clouds_rgb[0]*(0.6*nearest_dist[0] + 0.2*nearest_dist[1] + 0.2*nearest_dist[2]), 0.0, 1.0), 
-		g + clamp(clouds_rgb[1]*(0.2*nearest_dist[0] + 0.6*nearest_dist[1] + 0.2*nearest_dist[2]), 0.0, 1.0), 
-		b + clamp(clouds_rgb[2]*(0.2*nearest_dist[0] + 0.2*nearest_dist[1] + 0.6*nearest_dist[2]), 0.0, 1.0), 1.0);
+		r + clamp(clouds_rgb[0]*(0.5*nearest_dist[0] + 0.25*nearest_dist[1] + 0.25*nearest_dist[2]), 0.0, 1.0), 
+		g + clamp(clouds_rgb[1]*(0.25*nearest_dist[0] + 0.5*nearest_dist[1] + 0.25*nearest_dist[2]), 0.0, 1.0), 
+		b + clamp(clouds_rgb[2]*(0.25*nearest_dist[0] + 0.25*nearest_dist[1] + 0.5*nearest_dist[2]), 0.0, 1.0), 1.0);
 }
