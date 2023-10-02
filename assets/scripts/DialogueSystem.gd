@@ -4,14 +4,9 @@ extends CanvasLayer
 @export var nearest_encounter_dist: float
 
 var can_talk = false
-var all_encounter_text = {"jeff": 
-	{
-		"start": ["Hello my name is Jeff Goldblum.", "I am a famous actor who played Dr. Ian Malcolm in Jurassic Park.", "I must say you look quite ravishing today.", {"jeff": "end"}],
-		"end": ["I've already talked with you.", {}]
-	}
-}
+var all_encounter_text
 var encounter_flags = {
-	"jeff": "start"
+	"statue": "start"
 }
 var dialogue_index = 0
 var dialogue_open = false
@@ -111,6 +106,7 @@ func _input(event):
 func _ready():
 	nearest_encounter = ""
 	camera = get_node("/root/square_3D/Camera3D")
+	all_encounter_text = $EncounterText.all_encounter_text
 
 func _process(_delta):
 	var dialogue_to_enable = (nearest_encounter_dist <= speak_dist)

@@ -1,10 +1,12 @@
-[gd_scene load_steps=43 format=3 uid="uid://c0kjtb30py00w"]
+[gd_scene load_steps=32 format=3 uid="uid://c0kjtb30py00w"]
 
 [ext_resource type="Script" path="res://assets/scripts/GameplayController.gd" id="1_3kxac"]
 [ext_resource type="Script" path="res://assets/scripts/DialogueSystem.gd" id="1_ay7mc"]
 [ext_resource type="Shader" path="res://assets/shaders/pixel_shader.gdshader" id="1_btqfs"]
+[ext_resource type="Texture2D" uid="uid://dv4cdgjfwjjog" path="res://assets/sprites/goldblum.png" id="1_hf5ej"]
 [ext_resource type="Texture2D" uid="uid://4as34g0gisxw" path="res://assets/sprites/ring_w.png" id="2_o88bo"]
 [ext_resource type="Texture2D" uid="uid://clnaaw6mdndg6" path="res://assets/sprites/gradient.png" id="2_p60up"]
+[ext_resource type="Texture2D" uid="uid://ceb0bgmcfitla" path="res://assets/sprites/jeff.png" id="3_efu71"]
 [ext_resource type="Script" path="res://assets/scripts/NeedleController.gd" id="3_jcith"]
 [ext_resource type="Texture2D" uid="uid://c8kite4ohj6ij" path="res://assets/sprites/w_clouds.png" id="4_4ixyg"]
 [ext_resource type="Material" path="res://assets/shaders/light_dark_mat.tres" id="4_j2xs3"]
@@ -15,25 +17,13 @@
 [ext_resource type="Script" path="res://assets/scripts/TextColorController.gd" id="6_4177h"]
 [ext_resource type="Texture2D" uid="uid://qgd5c3gyljk8" path="res://assets/sprites/y_clouds.png" id="6_m10lw"]
 [ext_resource type="Texture2D" uid="uid://dfvjpls58nvx2" path="res://assets/sprites/ring_y.png" id="6_yfwic"]
-[ext_resource type="Texture2D" uid="uid://c4qo4bkarxdey" path="res://assets/sprites/bg_statue.png" id="7_1tdsr"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ring_dark.png" id="7_grxxw"]
 [ext_resource type="Texture2D" uid="uid://bljqvuau0fkov" path="res://assets/sprites/z_clouds.png" id="7_q6kx6"]
 [ext_resource type="Texture2D" uid="uid://bnbe6k71nf8bi" path="res://assets/sprites/grid.png" id="8_vx24x"]
 [ext_resource type="Texture2D" path="res://assets/sprites/dark_mode.png" id="9_4u013"]
 [ext_resource type="Texture2D" uid="uid://dfv0e6rhfwrw6" path="res://assets/sprites/dialogue_box.png" id="12_n0scj"]
-[ext_resource type="Texture2D" uid="uid://c4wonewpq6xj4" path="res://assets/sprites/figure_statue.png" id="13_ugaoy"]
-[ext_resource type="Texture2D" uid="uid://bthia21sfxxqa" path="res://assets/sprites/A_key.png" id="19_5dkhb"]
-[ext_resource type="Texture2D" uid="uid://bocmovkuspf4e" path="res://assets/sprites/W_key.png" id="19_jm64m"]
-[ext_resource type="Texture2D" uid="uid://852nuuphpfcd" path="res://assets/sprites/Q_key.png" id="20_b5e6q"]
 [ext_resource type="Script" path="res://assets/scripts/IntroScreenController.gd" id="21_fl1jq"]
 [ext_resource type="Texture2D" uid="uid://b6c1eslkghybm" path="res://assets/sprites/intro_bg.png" id="21_i3hi0"]
-[ext_resource type="Shader" path="res://assets/shaders/blink_shader.gdshader" id="21_rm4ih"]
-[ext_resource type="Texture2D" uid="uid://l1tgknk0ow05" path="res://assets/sprites/key_indicator.png" id="22_i2occ"]
-[ext_resource type="Texture2D" uid="uid://bqkbifvxoys4p" path="res://assets/sprites/S_key.png" id="22_nvhar"]
-[ext_resource type="Texture2D" uid="uid://tglhhbbrmgsr" path="res://assets/sprites/D_key.png" id="25_4ec1g"]
-[ext_resource type="Texture2D" uid="uid://b4n6m333ogb7v" path="res://assets/sprites/E_key.png" id="26_002ms"]
-[ext_resource type="Texture2D" uid="uid://ci57v1atgy4ak" path="res://assets/sprites/F_key.png" id="28_skai7"]
-[ext_resource type="Texture2D" uid="uid://bk1nrghxej3bb" path="res://assets/sprites/R_key.png" id="29_ljks1"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_sboss"]
 action = &"advance_dialogue"
@@ -63,14 +53,11 @@ shader_parameter/x_clouds = ExtResource("5_cxrtp")
 shader_parameter/y_clouds = ExtResource("6_m10lw")
 shader_parameter/z_clouds = ExtResource("7_q6kx6")
 shader_parameter/cloud_gradient = ExtResource("2_p60up")
-shader_parameter/key_textures = Array[Texture2D]([ExtResource("7_1tdsr")])
+shader_parameter/key_textures = Array[Texture2D]([ExtResource("3_efu71")])
 
 [sub_resource type="Environment" id="Environment_akhw1"]
 background_mode = 1
 background_color = Color(0.254902, 0.254902, 0.254902, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vv2nh"]
-shader = ExtResource("21_rm4ih")
 
 [node name="square_3D" type="Node3D"]
 script = ExtResource("1_3kxac")
@@ -80,6 +67,7 @@ layer = 2
 script = ExtResource("1_ay7mc")
 
 [node name="InteractButton" type="Button" parent="DialogueSystem"]
+visible = false
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -87,9 +75,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -58.0
-offset_top = 145.0
+offset_top = 147.0
 offset_right = 62.0
-offset_bottom = 209.0
+offset_bottom = 201.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
@@ -156,16 +144,15 @@ visible = false
 text = "(0, 0, 0, 0)"
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.836219, 0.548395, 0, -0.548395, 0.836219, 0, 2.15401, 3.17636)
+transform = Transform3D(1, 0, 0, 0, 0.390731, 0.920505, 0, -0.920505, 0.390731, 0, 1.64, 1.32)
 environment = SubResource("Environment_akhw1")
 
 [node name="FigureSprites" type="Node3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.173205, 0.1, 0, -0.1, 0.173205, 0, 0.274379, 0.504164)
 top_level = true
 
-[node name="StatueSprite" type="Sprite3D" parent="FigureSprites"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, -2.98023e-08, 0, 2.98023e-08, 0.5, 0, 0.83, -0.703)
-texture = ExtResource("13_ugaoy")
+[node name="JeffSprite" type="Sprite3D" parent="FigureSprites"]
+texture = ExtResource("1_hf5ej")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -196,44 +183,16 @@ texture = ExtResource("5_uhtxd")
 
 [node name="ValueLabel" type="RichTextLabel" parent="HUD/DialRectW"]
 layout_mode = 0
-offset_left = 57.5
+offset_left = 47.5
 offset_top = 152.5
-offset_right = 147.5
+offset_right = 216.5
 offset_bottom = 222.5
-theme_override_font_sizes/mono_font_size = 30
+theme_override_font_sizes/mono_font_size = 36
 bbcode_enabled = true
 text = "[code]00000[/code]"
 script = ExtResource("6_4177h")
 
-[node name="TextureRect" type="TextureRect" parent="HUD/DialRectW"]
-material = ExtResource("4_j2xs3")
-offset_left = 20.0
-offset_top = 178.75
-offset_right = 50.0
-offset_bottom = 208.75
-texture = ExtResource("19_5dkhb")
-stretch_mode = 2
-
-[node name="TextureRect2" type="TextureRect" parent="HUD/DialRectW"]
-material = ExtResource("4_j2xs3")
-offset_left = 151.25
-offset_top = 178.75
-offset_right = 181.25
-offset_bottom = 208.75
-texture = ExtResource("20_b5e6q")
-stretch_mode = 2
-
-[node name="IndicatorRect" type="TextureRect" parent="HUD/DialRectW"]
-material = SubResource("ShaderMaterial_vv2nh")
-offset_left = 151.25
-offset_top = 178.75
-offset_right = 181.25
-offset_bottom = 208.75
-texture = ExtResource("22_i2occ")
-stretch_mode = 2
-
 [node name="DialRectX" type="TextureRect" parent="HUD"]
-visible = false
 offset_left = 252.0
 offset_top = 662.0
 offset_right = 452.0
@@ -261,36 +220,16 @@ texture = ExtResource("5_uhtxd")
 
 [node name="ValueLabel" type="RichTextLabel" parent="HUD/DialRectX"]
 layout_mode = 0
-offset_left = 58.75
+offset_left = 48.75
 offset_top = 152.5
-offset_right = 148.75
+offset_right = 217.75
 offset_bottom = 222.5
-theme_override_font_sizes/mono_font_size = 30
+theme_override_font_sizes/mono_font_size = 36
 bbcode_enabled = true
 text = "[code]00000[/code]"
 script = ExtResource("6_4177h")
 
-[node name="TextureRect" type="TextureRect" parent="HUD/DialRectX"]
-material = ExtResource("4_j2xs3")
-layout_mode = 0
-offset_left = 20.0
-offset_top = 178.75
-offset_right = 50.0
-offset_bottom = 208.75
-texture = ExtResource("22_nvhar")
-stretch_mode = 2
-
-[node name="TextureRect2" type="TextureRect" parent="HUD/DialRectX"]
-material = ExtResource("4_j2xs3")
-offset_left = 151.25
-offset_top = 178.75
-offset_right = 181.25
-offset_bottom = 208.75
-texture = ExtResource("19_jm64m")
-stretch_mode = 2
-
 [node name="DialRectY" type="TextureRect" parent="HUD"]
-visible = false
 offset_left = 447.0
 offset_top = 662.0
 offset_right = 647.0
@@ -318,35 +257,16 @@ texture = ExtResource("5_uhtxd")
 
 [node name="ValueLabel" type="RichTextLabel" parent="HUD/DialRectY"]
 layout_mode = 0
-offset_left = 58.75
+offset_left = 48.75
 offset_top = 152.5
-offset_right = 148.75
+offset_right = 217.75
 offset_bottom = 222.5
-theme_override_font_sizes/mono_font_size = 30
+theme_override_font_sizes/mono_font_size = 36
 bbcode_enabled = true
 text = "[code]00000[/code]"
 script = ExtResource("6_4177h")
 
-[node name="TextureRect" type="TextureRect" parent="HUD/DialRectY"]
-material = ExtResource("4_j2xs3")
-offset_left = 20.0
-offset_top = 178.75
-offset_right = 50.0
-offset_bottom = 208.75
-texture = ExtResource("25_4ec1g")
-stretch_mode = 2
-
-[node name="TextureRect2" type="TextureRect" parent="HUD/DialRectY"]
-material = ExtResource("4_j2xs3")
-offset_left = 151.25
-offset_top = 178.75
-offset_right = 181.25
-offset_bottom = 208.75
-texture = ExtResource("26_002ms")
-stretch_mode = 2
-
 [node name="DialRectZ" type="TextureRect" parent="HUD"]
-visible = false
 offset_left = 641.0
 offset_top = 662.0
 offset_right = 841.0
@@ -374,32 +294,14 @@ texture = ExtResource("5_uhtxd")
 
 [node name="ValueLabel" type="RichTextLabel" parent="HUD/DialRectZ"]
 layout_mode = 0
-offset_left = 60.0
+offset_left = 50.0
 offset_top = 152.5
-offset_right = 150.0
+offset_right = 219.0
 offset_bottom = 222.5
-theme_override_font_sizes/mono_font_size = 30
+theme_override_font_sizes/mono_font_size = 36
 bbcode_enabled = true
 text = "[code]00000[/code]"
 script = ExtResource("6_4177h")
-
-[node name="TextureRect" type="TextureRect" parent="HUD/DialRectZ"]
-material = ExtResource("4_j2xs3")
-offset_left = 20.0
-offset_top = 178.75
-offset_right = 50.0
-offset_bottom = 208.75
-texture = ExtResource("28_skai7")
-stretch_mode = 2
-
-[node name="TextureRect2" type="TextureRect" parent="HUD/DialRectZ"]
-material = ExtResource("4_j2xs3")
-offset_left = 151.25
-offset_top = 178.75
-offset_right = 181.25
-offset_bottom = 208.75
-texture = ExtResource("29_ljks1")
-stretch_mode = 2
 
 [node name="RecenterButton" type="Button" parent="HUD"]
 anchors_preset = 8

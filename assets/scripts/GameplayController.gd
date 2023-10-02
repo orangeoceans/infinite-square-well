@@ -8,34 +8,42 @@ var center_pos: Vector4 = Vector4(50., 50., 50., 50.)
 var last_pos: Vector4
 
 var can_move: bool = false
+var tutorial: bool = true
 
 var square_sprite: Sprite2D;
 var pos_label: Label3D
 
 var keypoint_pos = {
-	"jeff": Vector4(50., 50., 50., 50.)
+	"statue": Vector4(50., 50., 50., 50.)
 }
 
 var keypoint_vec = {
-	"jeff": [
+	"statue": [
 		Vector4(1., 0., 0., 0.),
 		Vector4(0., 1., 0., 0.),
-		Vector4(0., 0., 1., 1.).normalized(),
+		Vector4(0., 0., 1., 0.),
 	]
 }
 
-var keypoint_fig_path = {"jeff": "/root/square_3D/FigureSprites/JeffSprite"}
+var keypoint_fig_path = {"statue": "/root/square_3D/FigureSprites/StatueSprite"}
 var keypoint_fig = {}
 
 var pos_tween
 var button_tween
+
+func end_tutorial():
+	tutorial = false
+	$HUD/DialRectX.show()
+	$HUD/DialRectY.show()
+	$HUD/DialRectZ.show()
+	$HUD/DialRectW/IndicatorRect.queue_free()
 
 func _ready():
 	square_sprite = $SquareMesh/SquareViewport/SquareSprite
 	pos_label = $PositionLabel
 	# Make sure the node has a material and that it's a ShaderMaterial
 	assert(square_sprite.material is ShaderMaterial)
-	pos = Vector4(center_pos)
+	pos = Vector4(45., 50., 50., 50.)
 	last_pos = pos
 	pos_label.text = str(pos)
 	square_sprite.material.set_shader_parameter("pos", pos)
@@ -45,26 +53,30 @@ func _ready():
 	update_square()
 
 func _process(_delta):
+	if tutorial:
+		if $DialogueSystem.encounter_flags["statue"] != "start":
+			end_tutorial()
 	if can_move and not $DialogueSystem.dialogue_open:
 		if Input.is_key_pressed(KEY_Q):
 			modify_pos(0, speed)
 		elif Input.is_key_pressed(KEY_A):
 			modify_pos(0, -speed)
-			
-		if Input.is_key_pressed(KEY_W):
-			modify_pos(1, speed)
-		elif Input.is_key_pressed(KEY_S):
-			modify_pos(1, -speed)
 
-		if Input.is_key_pressed(KEY_E):
-			modify_pos(2, speed)
-		elif Input.is_key_pressed(KEY_D):
-			modify_pos(2, -speed)
-			
-		if Input.is_key_pressed(KEY_R):
-			modify_pos(3, speed)
-		elif Input.is_key_pressed(KEY_F):
-			modify_pos(3, -speed)
+		if not tutorial:
+			if Input.is_key_pressed(KEY_W):
+				modify_pos(1, speed)
+			elif Input.is_key_pressed(KEY_S):
+				modify_pos(1, -speed)
+
+			if Input.is_key_pressed(KEY_E):
+				modify_pos(2, speed)
+			elif Input.is_key_pressed(KEY_D):
+				modify_pos(2, -speed)
+				
+			if Input.is_key_pressed(KEY_R):
+				modify_pos(3, speed)
+			elif Input.is_key_pressed(KEY_F):
+				modify_pos(3, -speed)
 	
 	if pos != last_pos:
 		update_square()
@@ -96,7 +108,7 @@ func update_square():
 			nearest_encounter_dist = keypoint_dist
 			nearest_encounter = key
 		keypoint_fig[key].modulate.a = clamp(1. - keypoint_dist**2, 0., 1.)
-		keypoint_fig[key].position.y = 0. - keypoint_dist**2
+		keypoint_fig[key].position.y = 0.83 - keypoint_dist**1.5
 	$DialogueSystem.nearest_encounter = nearest_encounter
 	$DialogueSystem.nearest_encounter_dist = nearest_encounter_dist
 	
