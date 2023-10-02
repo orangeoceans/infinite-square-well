@@ -18,7 +18,7 @@ var keypoints = ["statue", "trumpet", "salt"]
 var keypoint_pos = {
 	"statue": Vector4(50., 50., 50., 50.),
 	"trumpet": Vector4(50., 50., 73., 50.),
-	"salt": Vector4(50., 50., 73., 20.)
+	"salt": Vector4(50., 50., 73., 25.)
 }
 
 var keypoint_vec = {
