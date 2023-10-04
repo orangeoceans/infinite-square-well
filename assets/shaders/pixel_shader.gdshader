@@ -8,10 +8,9 @@ uniform sampler2D y_clouds;
 uniform sampler2D z_clouds;
 uniform sampler2D cloud_gradient;
 
-const int num_keypoints = 7;
-uniform sampler2D[num_keypoints] key_textures;
-uniform float[num_keypoints] keypoint_dists;
-uniform vec3[num_keypoints] point_line_dists;
+uniform sampler2D[2] key_textures;
+uniform float[2] keypoint_dists;
+uniform vec3[2] point_line_dists;
 
 uniform float max_pos = 100.;
 
@@ -23,21 +22,9 @@ const float cloud_size = 2048.;
 const float cloud_window = 256.;
 
 vec4 sample_texture_array(int index, vec2 uv) {
-    if (index == 0) {
+    if (index == 0)
         return texture(key_textures[0], uv);
-    } else if (index == 1) {
-        return texture(key_textures[1], uv);
-    } else if (index == 2) {
-        return texture(key_textures[2], uv);
-    } else if (index == 3) {
-        return texture(key_textures[3], uv);
-    } else if (index == 4) {
-        return texture(key_textures[4], uv);
-    } else if (index == 5) {
-        return texture(key_textures[5], uv);
-    } else {
-        return texture(key_textures[6], uv);
-    } 
+    return texture(key_textures[1], uv);
 }
 
 float point_line_distance(vec4 point, vec4 line_p, vec4 line_v) {
@@ -63,7 +50,7 @@ vec2 stretch_uv(vec2 uv, float phase, float mag, bool x_dir) {
 void fragment() {
 	float r = 0., g = 0., b = 0.;
 	vec3 nearest_dist = vec3(99999., 99999., 99999.);
-	for (int i = 0; i < num_keypoints; i++) {
+	for (int i = 0; i < 2; i++) {
 		float keypoint_dist = keypoint_dists[i];
 		vec3 point_line_dist = point_line_dists[i];
 		vec4 key_sample = sample_texture_array(i, UV); 
@@ -75,9 +62,9 @@ void fragment() {
 		g_add *= (1.-2.*keypoint_dist/max_pos);
 		b_add *= (1.-2.*keypoint_dist/max_pos);
 		if (near_key_index >= 0 && i != near_key_index) {
-			r_add *= clamp(near_key_dist, 0., 1.);
-			g_add *= clamp(near_key_dist, 0., 1.);
-			b_add *= clamp(near_key_dist, 0., 1.);
+			r_add *= clamp(near_key_dist/4., 0., 1.);
+			g_add *= clamp(near_key_dist/4., 0., 1.);
+			b_add *= clamp(near_key_dist/4., 0., 1.);
 		}
 		r += r_add;
 		g += g_add;

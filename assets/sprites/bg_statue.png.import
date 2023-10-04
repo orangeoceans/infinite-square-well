@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/bg_statue.png-d68db671caad067f80d0c01e54f18c6
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

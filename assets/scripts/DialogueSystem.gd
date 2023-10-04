@@ -80,7 +80,7 @@ func _on_button_pressed():
 		camera_tween.kill()
 	camera_tween = get_tree().create_tween().set_parallel(true)
 	camera_tween.tween_property(camera, 
-		"position", Vector3(0., 0.85, 1.05), 0.5
+		"position", Vector3(0., 0.75, 0.91), 0.5
 	)
 	camera_tween.tween_property(camera, 
 		"rotation", Vector3(-0.8, 0., 0.), 0.5

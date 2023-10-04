@@ -1,32 +1,26 @@
-[gd_scene load_steps=58 format=3 uid="uid://c0kjtb30py00w"]
+[gd_scene load_steps=52 format=3 uid="uid://c0kjtb30py00w"]
 
 [ext_resource type="Script" path="res://assets/scripts/GameplayController.gd" id="1_3kxac"]
 [ext_resource type="Script" path="res://assets/scripts/DialogueSystem.gd" id="1_ay7mc"]
 [ext_resource type="Shader" path="res://assets/shaders/pixel_shader.gdshader" id="1_btqfs"]
 [ext_resource type="Texture2D" uid="uid://4as34g0gisxw" path="res://assets/sprites/ring_w.png" id="2_o88bo"]
-[ext_resource type="Texture2D" uid="uid://clnaaw6mdndg6" path="res://assets/sprites/gradient.png" id="2_p60up"]
 [ext_resource type="Script" path="res://assets/scripts/NeedleController.gd" id="3_jcith"]
-[ext_resource type="Texture2D" uid="uid://c8kite4ohj6ij" path="res://assets/sprites/w_clouds.png" id="4_4ixyg"]
 [ext_resource type="Material" uid="uid://mijhtsyjdayj" path="res://assets/shaders/light_dark_mat.tres" id="4_j2xs3"]
 [ext_resource type="Script" path="res://assets/scripts/EncounterText.gd" id="4_ntamc"]
-[ext_resource type="Texture2D" uid="uid://do5naernrfrbc" path="res://assets/sprites/x_clouds.png" id="5_cxrtp"]
 [ext_resource type="Texture2D" uid="uid://dglfmw2ipe32v" path="res://assets/sprites/knob.png" id="5_uhtxd"]
 [ext_resource type="Texture2D" uid="uid://cc3sx832vtly3" path="res://assets/sprites/ring_x.png" id="5_ygdnb"]
 [ext_resource type="Script" path="res://assets/scripts/TextColorController.gd" id="6_4177h"]
-[ext_resource type="Texture2D" uid="uid://qgd5c3gyljk8" path="res://assets/sprites/y_clouds.png" id="6_m10lw"]
+[ext_resource type="Texture2D" uid="uid://clnaaw6mdndg6" path="res://assets/sprites/gradient.png" id="6_lm0ja"]
 [ext_resource type="Texture2D" uid="uid://dfvjpls58nvx2" path="res://assets/sprites/ring_y.png" id="6_yfwic"]
-[ext_resource type="Texture2D" uid="uid://c4qo4bkarxdey" path="res://assets/sprites/bg_statue.png" id="7_1tdsr"]
+[ext_resource type="Texture2D" uid="uid://b55kivlxnmuv5" path="res://assets/sprites/w_clouds.jpg" id="7_gkch4"]
 [ext_resource type="Texture2D" uid="uid://ccx3uhdh4rxpx" path="res://assets/sprites/ring_dark.png" id="7_grxxw"]
-[ext_resource type="Texture2D" uid="uid://bljqvuau0fkov" path="res://assets/sprites/z_clouds.png" id="7_q6kx6"]
-[ext_resource type="Texture2D" uid="uid://c3y6ewaavw7df" path="res://assets/sprites/bg_trumpet.png" id="8_csdby"]
+[ext_resource type="Texture2D" uid="uid://tgjaug472tx7" path="res://assets/sprites/x_clouds.jpg" id="8_ov1q2"]
 [ext_resource type="Texture2D" uid="uid://bnbe6k71nf8bi" path="res://assets/sprites/grid.png" id="8_vx24x"]
 [ext_resource type="Texture2D" uid="uid://c5h1ovjtr2plv" path="res://assets/sprites/dark_mode.png" id="9_4u013"]
-[ext_resource type="Texture2D" uid="uid://byp84scqf485t" path="res://assets/sprites/bg_empty.png" id="9_5j71c"]
-[ext_resource type="Texture2D" uid="uid://66ycqmq2vjkl" path="res://assets/sprites/bg_forest.png" id="10_j2a5t"]
-[ext_resource type="Texture2D" uid="uid://ctyk4f8d5lonc" path="res://assets/sprites/bg_siren.png" id="11_6np4d"]
+[ext_resource type="Texture2D" uid="uid://cmacumkhxo2bw" path="res://assets/sprites/y_clouds.jpg" id="9_wdc3r"]
+[ext_resource type="Texture2D" uid="uid://c2f42wdtoa87u" path="res://assets/sprites/z_clouds.jpg" id="10_6c00o"]
 [ext_resource type="PackedScene" uid="uid://dvk5i6al8p5om" path="res://assets/scenes/BGM.tscn" id="11_h7rot"]
 [ext_resource type="Texture2D" uid="uid://dfv0e6rhfwrw6" path="res://assets/sprites/dialogue_box.png" id="12_n0scj"]
-[ext_resource type="Texture2D" uid="uid://qsd6q8qw6ph" path="res://assets/sprites/bg_bubbles.png" id="12_pnqc8"]
 [ext_resource type="Texture2D" uid="uid://c4wonewpq6xj4" path="res://assets/sprites/figure_statue.png" id="13_ugaoy"]
 [ext_resource type="Texture2D" uid="uid://mt0migfaes2r" path="res://assets/sprites/figure_trumpet.png" id="15_obr3b"]
 [ext_resource type="Texture2D" uid="uid://dgdomc6uecr7m" path="res://assets/sprites/figure_salt.png" id="17_77v8s"]
@@ -47,7 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://b4n6m333ogb7v" path="res://assets/sprites/E_key.png" id="26_002ms"]
 [ext_resource type="Texture2D" uid="uid://ci57v1atgy4ak" path="res://assets/sprites/F_key.png" id="28_skai7"]
 [ext_resource type="Texture2D" uid="uid://bk1nrghxej3bb" path="res://assets/sprites/R_key.png" id="29_ljks1"]
-[ext_resource type="Texture2D" uid="uid://dvcnmldk7mcwr" path="res://assets/sprites/icon.png" id="47_h08yb"]
+[ext_resource type="Texture2D" uid="uid://cu1rt72dy8ebl" path="res://assets/sprites/icon.jpg" id="46_it12q"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_sboss"]
 action = &"advance_dialogue"
@@ -69,19 +63,19 @@ material = SubResource("StandardMaterial3D_6hw7o")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_la70n"]
 shader = ExtResource("1_btqfs")
-shader_parameter/pos = Vector4(0, 0, 0, 0)
+shader_parameter/pos = Vector4(1, 1, 1, 1)
 shader_parameter/keypoint_dists = null
 shader_parameter/point_line_dists = null
 shader_parameter/max_pos = 100.0
 shader_parameter/near_key_index = -1
 shader_parameter/near_key_dist = 0.0
 shader_parameter/speak_dist = 0.75
-shader_parameter/w_clouds = ExtResource("4_4ixyg")
-shader_parameter/x_clouds = ExtResource("5_cxrtp")
-shader_parameter/y_clouds = ExtResource("6_m10lw")
-shader_parameter/z_clouds = ExtResource("7_q6kx6")
-shader_parameter/cloud_gradient = ExtResource("2_p60up")
-shader_parameter/key_textures = Array[Texture2D]([ExtResource("7_1tdsr"), ExtResource("8_csdby"), ExtResource("9_5j71c"), ExtResource("9_5j71c"), ExtResource("10_j2a5t"), ExtResource("11_6np4d"), ExtResource("12_pnqc8")])
+shader_parameter/w_clouds = ExtResource("7_gkch4")
+shader_parameter/x_clouds = ExtResource("8_ov1q2")
+shader_parameter/y_clouds = ExtResource("9_wdc3r")
+shader_parameter/z_clouds = ExtResource("10_6c00o")
+shader_parameter/cloud_gradient = ExtResource("6_lm0ja")
+shader_parameter/key_textures = Array[Texture2D]([])
 
 [sub_resource type="Environment" id="Environment_akhw1"]
 background_mode = 1
@@ -186,32 +180,32 @@ transform = Transform3D(0.2, 0, 0, 0, 0.173205, 0.1, 0, -0.1, 0.173205, 0, 0.274
 top_level = true
 
 [node name="StatueSprite" type="Sprite3D" parent="FigureSprites"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, -2.98023e-08, 0, 2.98023e-08, 0.5, 0, -10.83, -0.703)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, -2.98023e-08, 0, 2.98023e-08, 0.5, 0, -10.83, 0)
 modulate = Color(1, 1, 1, 0)
 texture = ExtResource("13_ugaoy")
 
 [node name="TrumpetSprite" type="Sprite3D" parent="FigureSprites"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, -2.98023e-08, 0, 2.98023e-08, 0.5, 0, -10.83, -0.703)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, -2.98023e-08, 0, 2.98023e-08, 0.5, 0, -10.83, 0)
 modulate = Color(1, 1, 1, 0)
 texture = ExtResource("15_obr3b")
 
 [node name="SaltSprite" type="Sprite3D" parent="FigureSprites"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, -10.83, -1.0545)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, -10.83, 0)
 modulate = Color(1, 1, 1, 0)
 texture = ExtResource("17_77v8s")
 
 [node name="GhostSprite" type="Sprite3D" parent="FigureSprites"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, -10.83, -1.0545)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, -10.83, 0)
 modulate = Color(1, 1, 1, 0)
 texture = ExtResource("18_oxncn")
 
 [node name="SirenSprite" type="Sprite3D" parent="FigureSprites"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, -10.83, -1.0545)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, -10.83, 0)
 modulate = Color(1, 1, 1, 0)
 texture = ExtResource("19_hrio7")
 
 [node name="BubblesSprite" type="Sprite3D" parent="FigureSprites"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, -10.83, -1.0545)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, -4.47035e-08, 0, 4.47035e-08, 0.5, 0, -10.83, 0)
 modulate = Color(1, 1, 1, 0)
 texture = ExtResource("20_58rqc")
 
@@ -535,7 +529,7 @@ offset_top = 322.0
 offset_right = 860.0
 offset_bottom = 833.0
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("47_h08yb")
+texture = ExtResource("46_it12q")
 
 [node name="Credits" type="RichTextLabel" parent="HUD/IntroScreen"]
 layout_mode = 1

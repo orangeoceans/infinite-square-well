@@ -9,9 +9,9 @@ var audible_dist = 7.
 
 var keypoint_streams = {
 	"statue": $lofi,
-	"trumpet": $battle,
+	"trumpet": $tuba,
 	"salt": $chime,
-	"ghost": $beat,
+	"ghost": $buzz,
 	"forest": $lofi,
 	"siren": $lofi,
 	"bubbles": $chime

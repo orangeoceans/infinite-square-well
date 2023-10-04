@@ -27,6 +27,17 @@ var keypoint_pos = {
 	"bubbles": Vector4(18., 10., 73., 55.)
 }
 
+var keypoint_texture_path = {
+	"statue": "res://assets/sprites/bg_statue.png",
+	"trumpet": "res://assets/sprites/bg_trumpet.png",
+	"salt": "",
+	"ghost": "",
+	"forest": "res://assets/sprites/bg_forest.png",
+	"siren": "res://assets/sprites/bg_siren.png",
+	"bubbles": "",
+}
+var keypoint_textures = {}
+
 var keypoint_vec = {
 	"statue": [
 		Vector4(1., 0., 0., 0.),
@@ -87,6 +98,8 @@ func _ready():
 	square_sprite.material.set_shader_parameter("max_pos", max_pos)
 	for key in keypoint_fig_path:
 		keypoint_fig[key] = get_node(keypoint_fig_path[key]) if keypoint_fig_path[key] else null
+	for key in keypoint_texture_path:
+		keypoint_textures[key] = load(keypoint_texture_path[key]) if keypoint_texture_path[key] else null
 	update_square()
 
 func _process(_delta):
@@ -133,19 +146,29 @@ func update_square():
 	var keypoint_dists = []
 	var nearest_encounter = ""
 	var nearest_encounter_dist = 9999999
+	var nearest_line_dists = [9999999, 999999999]
+	var nearest_line_dist_vs = [Vector3(999999,999999,999999), Vector3(999999,999999,999999)]
+	var nearest_line_keys = ["", ""]
 	for key in keypoints:
-		if len(keypoint_vec[key]) == 3:
-			point_line_dists.append(
-				Vector3(
+		if len(keypoint_vec[key]) == 3 and keypoint_texture_path[key]:
+			var line_dist_v = Vector3(
 					point_line_distance(pos, keypoint_pos[key], keypoint_vec[key][0]),
 					point_line_distance(pos, keypoint_pos[key], keypoint_vec[key][1]),
 					point_line_distance(pos, keypoint_pos[key], keypoint_vec[key][2]),
 				)
-			)
-		else:
-			point_line_dists.append(Vector3(9999999,9999999,9999999))
+			var nearest_line_dist = min(line_dist_v[0], min(line_dist_v[1], line_dist_v[2]))
+			if nearest_line_dist <= nearest_line_dists[0]:
+				nearest_line_dists[1] = nearest_line_dists[0]
+				nearest_line_dist_vs[1] = nearest_line_dist_vs[0]
+				nearest_line_keys[1] = nearest_line_keys[0]
+				nearest_line_dists[0] = nearest_line_dist
+				nearest_line_dist_vs[0] = line_dist_v
+				nearest_line_keys[0] = key
+			elif nearest_line_dist <= nearest_line_dists[1]:
+				nearest_line_dists[1] = nearest_line_dist
+				nearest_line_dist_vs[1] = line_dist_v
+				nearest_line_keys[1] = key
 		var keypoint_dist = keypoint_pos[key].distance_to(pos)
-		keypoint_dists.append(keypoint_dist)
 		if keypoint_dist < nearest_encounter_dist and key in $DialogueSystem.all_encounter_text:
 			nearest_encounter_dist = keypoint_dist
 			nearest_encounter = key
@@ -154,14 +177,20 @@ func update_square():
 		keypoint_fig[nearest_encounter].position.y = 0.83 - nearest_encounter_dist**1.5
 	$DialogueSystem.nearest_encounter = nearest_encounter
 	$DialogueSystem.nearest_encounter_dist = nearest_encounter_dist
-	if nearest_encounter_dist <= $DialogueSystem.speak_dist and len(keypoint_vec[nearest_encounter]) > 0:
-		square_sprite.material.set_shader_parameter("near_key_index", keypoints.find(nearest_encounter))
+	if nearest_encounter_dist <= $DialogueSystem.speak_dist*4. and len(keypoint_vec[nearest_encounter]) > 0:
+		square_sprite.material.set_shader_parameter("near_key_index", nearest_line_keys.find(nearest_encounter))
 		square_sprite.material.set_shader_parameter("near_key_dist", nearest_encounter_dist)
 	else:
 		square_sprite.material.set_shader_parameter("near_key_index", -1)
 		square_sprite.material.set_shader_parameter("near_key_dist", 99999.)
-	square_sprite.material.set_shader_parameter("keypoint_dists", keypoint_dists)
-	square_sprite.material.set_shader_parameter("point_line_dists", point_line_dists)
+	square_sprite.material.set_shader_parameter("point_line_dists", nearest_line_dist_vs)
+	var nearest_key_textures = [keypoint_textures[nearest_line_keys[0]], keypoint_textures[nearest_line_keys[1]]]
+	var nearest_keypoint_dists = [
+		keypoint_pos[nearest_line_keys[0]].distance_to(pos),
+		keypoint_pos[nearest_line_keys[1]].distance_to(pos)
+	]
+	square_sprite.material.set_shader_parameter("keypoint_dists", nearest_keypoint_dists)
+	square_sprite.material.set_shader_parameter("key_textures", nearest_key_textures)
 	square_sprite.material.set_shader_parameter("pos", pos)
 	pos_label.text = "%.2f %.2f %.2f %.2f" % [pos[0], pos[1], pos[2], pos[3]]
 
